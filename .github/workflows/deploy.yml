@@ -20,6 +20,6 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
-          source: "index.html"
+          source: "index.php,site.template.html,admin.html,admin.css,admin.js,README.md,api/**"
           target: ${{ secrets.DEPLOY_TARGET }}
           strip_components: 0

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MPK Mebel Admin</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <main class="admin-shell">
+    <section class="login-card" id="login-card">
+      <p class="eyebrow">MPK Mebel Admin</p>
+      <h1>Вход в админку</h1>
+      <p class="muted">После входа можно менять тексты, ссылки и изображения по блокам сайта.</p>
+      <form id="login-form" class="stack">
+        <label>
+          Логин
+          <input type="text" name="username" autocomplete="username" required>
+        </label>
+        <label>
+          Пароль
+          <input type="password" name="password" autocomplete="current-password" required>
+        </label>
+        <button type="submit">Войти</button>
+      </form>
+      <p class="status" id="login-status"></p>
+    </section>
+
+    <section class="admin-panel hidden" id="admin-panel">
+      <header class="panel-head">
+        <div>
+          <p class="eyebrow">Редактор сайта</p>
+          <h2>Тексты и изображения по блокам</h2>
+        </div>
+        <div class="panel-actions">
+          <a class="ghost" href="/" target="_blank" rel="noreferrer">Открыть сайт</a>
+          <button class="ghost" id="logout-button" type="button">Выйти</button>
+          <button id="save-button" type="button">Сохранить изменения</button>
+        </div>
+      </header>
+
+      <div class="notice">
+        Изображения можно либо вставлять ссылкой, либо загружать через кнопку рядом с полем.
+      </div>
+
+      <div id="editor-root" class="editor-root"></div>
+      <p class="status" id="save-status"></p>
+    </section>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>
+
