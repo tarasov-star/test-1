@@ -3,10 +3,179 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>test-1</title>
+  <title>tarasov-star | test-1</title>
+  <style>
+    :root {
+      --bg: #f6efe4;
+      --panel: rgba(255, 252, 247, 0.82);
+      --text: #1f1a17;
+      --muted: #6a5f58;
+      --accent: #c45c2d;
+      --accent-dark: #8e3f1d;
+      --line: rgba(31, 26, 23, 0.1);
+      --shadow: 0 24px 60px rgba(74, 45, 29, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(196, 92, 45, 0.22), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(78, 121, 94, 0.18), transparent 28%),
+        linear-gradient(135deg, #f8f1e7 0%, #efe5d5 48%, #e8dcc8 100%);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: min(760px, 100%);
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero {
+      padding: 56px 32px 32px;
+      position: relative;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      font-size: 0.9rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      line-height: 0.95;
+      max-width: 8ch;
+    }
+
+    .lead {
+      margin: 20px 0 0;
+      max-width: 38rem;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      padding: 0 32px 32px;
+    }
+
+    .panel {
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(31, 26, 23, 0.08);
+    }
+
+    .panel h2 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+    }
+
+    .panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 0 32px 40px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .button.primary {
+      background: var(--accent);
+      color: #fff9f3;
+      box-shadow: 0 12px 28px rgba(196, 92, 45, 0.28);
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.65);
+      color: var(--text);
+      border: 1px solid rgba(31, 26, 23, 0.08);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 640px) {
+      .hero,
+      .grid,
+      .actions {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .hero {
+        padding-top: 32px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Privet, GitHub!</h1>
-  <p>Perвая HTML-страница для репозитория test-1.</p>
+  <main class="card">
+    <section class="hero">
+      <p class="eyebrow">GitHub debut</p>
+      <h1>Простая страница с характером</h1>
+      <p class="lead">
+        Это первый оформленный HTML-файл в репозитории <strong>test-1</strong>.
+        Страница сделана без библиотек: только чистый HTML и CSS, чтобы её можно было
+        открыть сразу и использовать как стартовую точку для будущего сайта.
+      </p>
+    </section>
+
+    <section class="grid">
+      <article class="panel">
+        <h2>Что уже есть</h2>
+        <p>Адаптивная верстка, мягкий фон, крупная типографика и аккуратные карточки контента.</p>
+      </article>
+      <article class="panel">
+        <h2>Что можно сделать дальше</h2>
+        <p>Добавить контакты, портфолио, изображения, навигацию или превратить страницу в лендинг.</p>
+      </article>
+      <article class="panel">
+        <h2>Для кого</h2>
+        <p>Для аккаунта <strong>tarasov-star</strong> как первая аккуратная публикация на GitHub Pages или в репозитории.</p>
+      </article>
+    </section>
+
+    <section class="actions">
+      <a class="button primary" href="https://github.com/tarasov-star/test-1">Открыть репозиторий</a>
+      <a class="button secondary" href="https://github.com/tarasov-star">Профиль GitHub</a>
+    </section>
+  </main>
 </body>
 </html>
