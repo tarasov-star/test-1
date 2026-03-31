@@ -44,11 +44,30 @@ const schema = [
     ]
   },
   {
+    title: "Категории",
+    fields: [
+      { label: "Заголовок", selector: "#intro-note h2", type: "text" },
+      { label: "Категория 1 заголовок", selector: "#intro-note .category-item:nth-of-type(1) h3", type: "text" },
+      { label: "Категория 1 текст", selector: "#intro-note .category-item:nth-of-type(1) p", type: "textarea" },
+      { label: "Категория 2 заголовок", selector: "#intro-note .category-item:nth-of-type(2) h3", type: "text" },
+      { label: "Категория 2 текст", selector: "#intro-note .category-item:nth-of-type(2) p", type: "textarea" },
+      { label: "Категория 3 заголовок", selector: "#intro-note .category-item:nth-of-type(3) h3", type: "text" },
+      { label: "Категория 3 текст", selector: "#intro-note .category-item:nth-of-type(3) p", type: "textarea" },
+      { label: "Категория 4 заголовок", selector: "#intro-note .category-item:nth-of-type(4) h3", type: "text" },
+      { label: "Категория 4 текст", selector: "#intro-note .category-item:nth-of-type(4) p", type: "textarea" },
+      { label: "Категория 5 заголовок", selector: "#intro-note .category-item:nth-of-type(5) h3", type: "text" },
+      { label: "Категория 5 текст", selector: "#intro-note .category-item:nth-of-type(5) p", type: "textarea" },
+      { label: "Категория 6 заголовок", selector: "#intro-note .category-item:nth-of-type(6) h3", type: "text" },
+      { label: "Категория 6 текст", selector: "#intro-note .category-item:nth-of-type(6) p", type: "textarea" }
+    ]
+  },
+  {
     title: "Проекты",
     fields: [
       { label: "Kicker", selector: "#projects .kicker", type: "text" },
       { label: "Заголовок", selector: "#projects h2", type: "textarea" },
-      { label: "Описание справа", selector: "#projects .lead", type: "textarea" },
+      { label: "Текст кнопки справа", selector: "#projects .lead", type: "text" },
+      { label: "Ссылка кнопки справа", selector: "#projects .lead", attr: "href", type: "url" },
       { label: "Карточка 1 заголовок", selector: "#projects .portfolio-card:nth-of-type(1) h3", type: "text" },
       { label: "Карточка 1 текст", selector: "#projects .portfolio-card:nth-of-type(1) p", type: "textarea" },
       { label: "Карточка 1 изображение", selector: "#projects .portfolio-card:nth-of-type(1) img", attr: "src", type: "image" },
@@ -123,8 +142,9 @@ const schema = [
     fields: [
       { label: "Story kicker", selector: "#story .story .kicker", type: "text" },
       { label: "Story заголовок", selector: "#story .story h2", type: "textarea" },
-      { label: "Story абзац 1", selector: "#story .story p:nth-of-type(2)", type: "textarea" },
-      { label: "Story абзац 2", selector: "#story .story p:nth-of-type(3)", type: "textarea" },
+      { label: "Story абзац 1", selector: "#story .story p:nth-of-type(1)", type: "textarea" },
+      { label: "Story абзац 2", selector: "#story .story p:nth-of-type(2)", type: "textarea" },
+      { label: "Story абзац 3", selector: "#story .story p:nth-of-type(3)", type: "textarea" },
       { label: "Офферы kicker", selector: "#offers .kicker", type: "text" },
       { label: "Офферы заголовок", selector: "#offers h2", type: "textarea" },
       { label: "Оффер 1 заголовок", selector: "#offers .offer-card:nth-of-type(1) h3", type: "text" },
