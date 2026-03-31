@@ -670,6 +670,8 @@ body {
       align-items: center;
       justify-content: space-between;
       gap: 18px;
+      grid-column: span 2;
+      min-height: 220px;
       padding: 24px 26px;
       border: 1px solid rgba(184, 149, 106, 0.22);
       border-radius: var(--radius);
@@ -1756,22 +1758,25 @@ body {
       }
 
       .portfolio-grid {
-        display: grid;
-        grid-auto-flow: column;
-        grid-auto-columns: 85vw;
+        display: flex;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
-        padding: 0 20px 8px;
-        margin: 0 -20px;
+        padding: 0 16px 8px;
+        margin: 0 -16px;
         gap: 12px;
       }
 
       .portfolio-card,
       .portfolio-card.large {
-        grid-column: span 1;
-        grid-row: span 1;
+        flex: 0 0 85vw;
         min-height: 280px;
         scroll-snap-align: center;
+      }
+
+      .inline-cta {
+        flex: 0 0 85vw;
+        min-width: 85vw;
+        min-height: 280px;
       }
 
       .quick-nav {
@@ -1782,7 +1787,6 @@ body {
       }
 
       .inline-cta {
-        min-width: 85vw;
         flex-direction: column;
         align-items: flex-start;
       }
