@@ -19,7 +19,7 @@ jobs:
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
-          password: ${{ secrets.DEPLOY_PASSWORD }}
+          key: ${{ secrets.DEPLOY_KEY }}
           source: "index.html"
           target: ${{ secrets.DEPLOY_TARGET }}
           strip_components: 0
