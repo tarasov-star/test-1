@@ -3,179 +3,1463 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>tarasov-star | test-1</title>
+  <title>МПК Мебель | Мебель на заказ в Краснодаре</title>
+  <meta
+    name="description"
+    content="Мебель на заказ в Краснодаре: кухни, шкафы, гардеробные и корпусная мебель по индивидуальным проектам. Бесплатный замер, собственное производство, монтаж под ключ."
+  >
+  <script>
+    document.documentElement.classList.add("motion-ready");
+  </script>
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+
     :root {
-      --bg: #f6efe4;
-      --panel: rgba(255, 252, 247, 0.82);
-      --text: #1f1a17;
-      --muted: #6a5f58;
-      --accent: #c45c2d;
-      --accent-dark: #8e3f1d;
-      --line: rgba(31, 26, 23, 0.1);
-      --shadow: 0 24px 60px rgba(74, 45, 29, 0.18);
+      --bg: #f4eee6;
+      --bg-strong: #e7d9c8;
+      --surface: rgba(255, 250, 244, 0.82);
+      --surface-strong: #fffaf4;
+      --surface-dark: #1c1713;
+      --text: #1e1813;
+      --muted: #65584e;
+      --accent: #b46235;
+      --accent-strong: #7d3f1e;
+      --line: rgba(30, 24, 19, 0.1);
+      --success: #284f3f;
+      --shadow: 0 30px 80px rgba(61, 34, 17, 0.14);
+      --radius-xl: 36px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --container: 1180px;
     }
 
     * {
       box-sizing: border-box;
     }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Georgia, "Times New Roman", serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(196, 92, 45, 0.22), transparent 32%),
-        radial-gradient(circle at bottom right, rgba(78, 121, 94, 0.18), transparent 28%),
-        linear-gradient(135deg, #f8f1e7 0%, #efe5d5 48%, #e8dcc8 100%);
-      display: grid;
-      place-items: center;
-      padding: 24px;
+    html {
+      scroll-behavior: smooth;
     }
 
-    .card {
-      width: min(760px, 100%);
-      background: var(--panel);
+    body {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(180, 98, 53, 0.22), transparent 28%),
+        radial-gradient(circle at 85% 10%, rgba(40, 79, 63, 0.16), transparent 24%),
+        linear-gradient(180deg, #f6efe7 0%, #efe3d2 38%, #f8f3ed 100%);
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(calc(100% - 32px), var(--container));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
       backdrop-filter: blur(14px);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
+      background: rgba(244, 238, 230, 0.8);
+      border-bottom: 1px solid rgba(30, 24, 19, 0.08);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 76px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #fff8f1;
+      box-shadow: 0 12px 24px rgba(125, 63, 30, 0.24);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .nav a:hover,
+    .contacts a:hover,
+    .contact-links a:hover,
+    .footer-links a:hover {
+      color: var(--accent-strong);
+    }
+
+    .contacts {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.95rem;
     }
 
     .hero {
-      padding: 56px 32px 32px;
+      padding: 54px 0 32px;
+    }
+
+    .hero-shell {
       position: relative;
+      overflow: hidden;
+      border-radius: 42px;
+      background:
+        linear-gradient(135deg, rgba(28, 23, 19, 0.88), rgba(28, 23, 19, 0.62)),
+        url("https://f2.lpcdn.site/a934f26ab5ebf35db5768a852aaa764e/4dcfbc0f93a15ed7e28df828f813ce95.jpg") center/cover;
+      color: #fff8f0;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-shell::after {
+      content: "";
+      position: absolute;
+      inset: auto auto -90px -60px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 230, 208, 0.2), transparent 68%);
+      animation: orbFloat 8s ease-in-out infinite;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+      gap: 28px;
+      padding: 56px;
     }
 
     .eyebrow {
-      margin: 0 0 14px;
-      font-size: 0.9rem;
-      letter-spacing: 0.18em;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 250, 244, 0.12);
+      border: 1px solid rgba(255, 250, 244, 0.16);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--accent-dark);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.045em;
+      line-height: 0.96;
+      text-wrap: balance;
     }
 
     h1 {
-      margin: 0;
-      font-size: clamp(2.4rem, 6vw, 5rem);
-      line-height: 0.95;
+      margin-top: 24px;
+      font-size: clamp(2.9rem, 7vw, 5.5rem);
       max-width: 8ch;
     }
 
-    .lead {
-      margin: 20px 0 0;
-      max-width: 38rem;
-      font-size: 1.1rem;
-      line-height: 1.7;
-      color: var(--muted);
+    .hero-copy p {
+      margin: 22px 0 0;
+      max-width: 42rem;
+      color: rgba(255, 248, 240, 0.82);
+      font-size: 1.08rem;
+      line-height: 1.75;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      padding: 0 32px 32px;
-    }
-
-    .panel {
-      padding: 20px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.55);
-      border: 1px solid rgba(31, 26, 23, 0.08);
-    }
-
-    .panel h2 {
-      margin: 0 0 10px;
-      font-size: 1.1rem;
-    }
-
-    .panel p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .actions {
+    .hero-actions,
+    .contact-links,
+    .footer-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      padding: 0 32px 40px;
+      gap: 14px;
+    }
+
+    .hero-actions {
+      margin-top: 30px;
     }
 
     .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 14px 18px;
+      min-height: 54px;
+      padding: 14px 22px;
+      border: 0;
       border-radius: 999px;
-      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
       font-weight: 700;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-    }
-
-    .button.primary {
-      background: var(--accent);
-      color: #fff9f3;
-      box-shadow: 0 12px 28px rgba(196, 92, 45, 0.28);
-    }
-
-    .button.secondary {
-      background: rgba(255, 255, 255, 0.65);
-      color: var(--text);
-      border: 1px solid rgba(31, 26, 23, 0.08);
+      text-align: center;
     }
 
     .button:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
     }
 
-    @media (max-width: 640px) {
-      .hero,
-      .grid,
-      .actions {
-        padding-left: 20px;
-        padding-right: 20px;
+    .button.primary {
+      color: #fff8f0;
+      background: linear-gradient(135deg, #c77445, #8f471f);
+      box-shadow: 0 16px 30px rgba(180, 98, 53, 0.28);
+    }
+
+    .button.secondary {
+      color: #fff8f0;
+      background: rgba(255, 248, 240, 0.08);
+      border: 1px solid rgba(255, 248, 240, 0.16);
+    }
+
+    .button.light {
+      color: var(--text);
+      background: #fff8f1;
+      box-shadow: 0 14px 28px rgba(31, 24, 19, 0.1);
+    }
+
+    .hero-meta {
+      display: grid;
+      gap: 14px;
+      align-self: end;
+    }
+
+    .metric,
+    .glass-card,
+    .portfolio-card,
+    .value-card,
+    .process-card,
+    .offer-card,
+    .review-card,
+    .faq-card,
+    .contact-card,
+    .cta-panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .metric {
+      padding: 22px;
+      background: rgba(255, 250, 244, 0.14);
+      border-color: rgba(255, 248, 240, 0.15);
+      backdrop-filter: blur(10px);
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 10px;
+      font-size: 1.2rem;
+    }
+
+    .metric span {
+      color: rgba(255, 248, 240, 0.76);
+      line-height: 1.5;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .section {
+      padding: 56px 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 28px;
+      margin-bottom: 34px;
+    }
+
+    .section-header p,
+    .intro-card p,
+    .value-card p,
+    .process-card p,
+    .review-card p,
+    .faq-card p,
+    .contact-card p,
+    .cta-panel p,
+    .offer-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    .kicker {
+      margin-bottom: 12px;
+      color: var(--accent-strong);
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .section-header h2,
+    .story h2,
+    .contact-info h2,
+    .cta-panel h2 {
+      font-size: clamp(2rem, 4.8vw, 3.25rem);
+      max-width: 8ch;
+    }
+
+    .section-header .lead {
+      max-width: 35rem;
+    }
+
+    .intro-card,
+    .glass-card,
+    .contact-card,
+    .cta-panel {
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+    }
+
+    .intro-card {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .portfolio-card {
+      overflow: hidden;
+      background: var(--surface-strong);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+
+    .portfolio-card.large {
+      grid-column: span 7;
+    }
+
+    .portfolio-card.tall {
+      grid-column: span 5;
+    }
+
+    .portfolio-card.small {
+      grid-column: span 4;
+    }
+
+    .portfolio-card img {
+      width: 100%;
+      height: 290px;
+      object-fit: cover;
+      transform: scale(1.01);
+      transition: transform 0.65s ease;
+    }
+
+    .portfolio-card.tall img {
+      height: 598px;
+    }
+
+    .portfolio-body {
+      padding: 24px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .gallery-card {
+      overflow: hidden;
+      background: rgba(255, 250, 244, 0.76);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      min-width: 0;
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      transition: transform 0.65s ease;
+    }
+
+    .gallery-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 70px rgba(61, 34, 17, 0.18);
+      border-color: rgba(180, 98, 53, 0.18);
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-body {
+      padding: 18px 20px 20px;
+    }
+
+    .gallery-body h3 {
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .gallery-body p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .portfolio-card:hover,
+    .value-card:hover,
+    .process-card:hover,
+    .offer-card:hover,
+    .review-card:hover,
+    .faq-card:hover,
+    .contact-card:hover,
+    .story-card:hover,
+    .cta-panel:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 70px rgba(61, 34, 17, 0.18);
+      border-color: rgba(180, 98, 53, 0.18);
+    }
+
+    .portfolio-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .portfolio-body h3,
+    .value-card h3,
+    .story-card h3,
+    .offer-card h3,
+    .review-card h3,
+    .faq-card h3,
+    .contact-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .pill {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(180, 98, 53, 0.1);
+      color: var(--accent-strong);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .values-grid,
+    .process-grid,
+    .offers-grid,
+    .reviews-grid,
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .value-card,
+    .process-card,
+    .offer-card,
+    .review-card,
+    .faq-card {
+      padding: 28px;
+      background: rgba(255, 250, 244, 0.78);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      min-width: 0;
+    }
+
+    .value-card strong,
+    .process-card strong {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(180, 98, 53, 0.12);
+      color: var(--accent-strong);
+      margin-bottom: 16px;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .story {
+      padding: 40px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, #201914, #32261d);
+      color: #fff6ee;
+      box-shadow: var(--shadow);
+    }
+
+    .story p {
+      margin: 16px 0 0;
+      color: rgba(255, 246, 238, 0.76);
+      line-height: 1.75;
+      max-width: 42rem;
+    }
+
+    .story-stack {
+      display: grid;
+      gap: 24px;
+    }
+
+    .story-card {
+      padding: 28px;
+      background: rgba(255, 250, 244, 0.84);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      min-width: 0;
+    }
+
+    .story-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .story-card li + li {
+      margin-top: 8px;
+    }
+
+    .offer-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .offer-card::after {
+      content: "";
+      position: absolute;
+      right: -40px;
+      bottom: -40px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(180, 98, 53, 0.16), transparent 65%);
+    }
+
+    .review-card .source {
+      display: inline-flex;
+      margin-top: 18px;
+      color: var(--accent-strong);
+      font-weight: 700;
+    }
+
+    .cta-band {
+      padding: 14px 0 36px;
+    }
+
+    .cta-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+      gap: 28px;
+      padding: 34px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .contact-card {
+      padding: 30px;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      min-width: 0;
+    }
+
+    .motion-ready [data-reveal] {
+      opacity: 0;
+      transform: translateY(34px) scale(0.985);
+      filter: blur(8px);
+      transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: var(--delay, 0ms);
+      will-change: transform, opacity, filter;
+    }
+
+    .motion-ready [data-reveal].is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    .motion-ready .hero-copy > *,
+    .motion-ready .hero-meta .metric {
+      opacity: 0;
+      transform: translateY(28px);
+      transition:
+        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .motion-ready .hero-copy > *.is-visible,
+    .motion-ready .hero-meta .metric.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .motion-ready .section-header h2.is-visible {
+      animation: titleLift 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes orbFloat {
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0) scale(1);
       }
 
-      .hero {
-        padding-top: 32px;
+      50% {
+        transform: translate3d(18px, -12px, 0) scale(1.06);
+      }
+    }
+
+    @keyframes titleLift {
+      0% {
+        letter-spacing: -0.08em;
+        transform: translateY(20px);
+      }
+
+      100% {
+        letter-spacing: -0.045em;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
+      }
+
+      .motion-ready [data-reveal],
+      .motion-ready .hero-copy > *,
+      .motion-ready .hero-meta .metric {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+      }
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .contact-list strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--accent-strong);
+      font-size: 0.84rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .contact-form label {
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid rgba(30, 24, 19, 0.12);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--text);
+      min-width: 0;
+    }
+
+    .contact-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-note {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 28px 0 56px;
+      color: var(--muted);
+    }
+
+    .footer-shell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(30, 24, 19, 0.1);
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .story-grid,
+      .cta-panel,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-row,
+      .values-grid,
+      .process-grid,
+      .offers-grid,
+      .reviews-grid,
+      .faq-grid,
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .portfolio-card.large,
+      .portfolio-card.tall,
+      .portfolio-card.small {
+        grid-column: span 6;
+      }
+
+      .portfolio-card.tall img {
+        height: 290px;
+      }
+
+      .nav {
+        display: none;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .topbar-inner,
+      .contacts,
+      .section-header,
+      .footer-shell {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-grid {
+        padding: 28px 20px;
+      }
+
+      h1 {
+        font-size: 2.8rem;
+      }
+
+      .stats-row,
+      .values-grid,
+      .process-grid,
+      .offers-grid,
+      .reviews-grid,
+      .faq-grid,
+      .portfolio-grid,
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .portfolio-card.large,
+      .portfolio-card.tall,
+      .portfolio-card.small {
+        grid-column: span 1;
+      }
+
+      .cta-panel,
+      .contact-card,
+      .story,
+      .story-card,
+      .value-card,
+      .process-card,
+      .offer-card,
+      .review-card,
+      .faq-card {
+        padding: 20px;
+      }
+
+      .hero-shell,
+      .story,
+      .contact-card,
+      .cta-panel {
+        border-radius: 28px;
       }
     }
   </style>
 </head>
 <body>
-  <main class="card">
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="#top">
+        <span class="brand-mark">М</span>
+        <span>МПК Мебель</span>
+      </a>
+      <nav class="nav">
+        <a href="#projects">Проекты</a>
+        <a href="#advantages">Преимущества</a>
+        <a href="#offers">Акции</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <div class="contacts">
+        <a href="tel:+79286682651">+7 (928) 668-26-51</a>
+        <a href="https://wa.me/79286682651" target="_blank" rel="noreferrer">WhatsApp</a>
+        <a href="https://t.me/mpk_mebel" target="_blank" rel="noreferrer">Telegram</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
     <section class="hero">
-      <p class="eyebrow">GitHub debut</p>
-      <h1>Простая страница с характером</h1>
-      <p class="lead">
-        Это первый оформленный HTML-файл в репозитории <strong>test-1</strong>.
-        Страница сделана без библиотек: только чистый HTML и CSS, чтобы её можно было
-        открыть сразу и использовать как стартовую точку для будущего сайта.
-      </p>
+      <div class="container hero-shell">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow">Собственное производство в Краснодаре</span>
+            <h1>Мебель на заказ в Краснодаре.</h1>
+            <p>
+              Кухни, шкафы, гардеробные и корпусная мебель по индивидуальным размерам.
+              Проектируем под ваш сценарий жизни, подбираем материалы и фурнитуру,
+              выезжаем на бесплатный замер и берём монтаж под ключ.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#contacts">Получить дизайн-проект</a>
+              <a class="button secondary" href="https://wa.me/79286682651" target="_blank" rel="noreferrer">Написать в WhatsApp</a>
+            </div>
+            <div class="stats-row">
+              <div class="metric">
+                <strong>Бесплатный замер</strong>
+                <span>Выезд по Краснодару без доплат и скрытых условий.</span>
+              </div>
+              <div class="metric">
+                <strong>1 год гарантии</strong>
+                <span>Работаем по договору и отвечаем за итоговый результат.</span>
+              </div>
+              <div class="metric">
+                <strong>Своё производство</strong>
+                <span>Контролируем качество на каждом этапе изготовления.</span>
+              </div>
+              <div class="metric">
+                <strong>Под ключ</strong>
+                <span>Доставка, сборка и монтаж в одном процессе.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-meta">
+            <div class="metric">
+              <span>Категории мебели</span>
+              <strong>Кухни, шкафы, гардеробные, прихожие, ТВ-зоны, мебель для ванной.</strong>
+            </div>
+            <div class="metric">
+              <span>Локация</span>
+              <strong>Производство в центре Краснодара, район КТ «Аврора».</strong>
+            </div>
+            <div class="metric">
+              <span>Фурнитура и материалы</span>
+              <strong>Работаем с проверенными поставщиками и современным оборудованием.</strong>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section class="grid">
-      <article class="panel">
-        <h2>Что уже есть</h2>
-        <p>Адаптивная верстка, мягкий фон, крупная типографика и аккуратные карточки контента.</p>
-      </article>
-      <article class="panel">
-        <h2>Что можно сделать дальше</h2>
-        <p>Добавить контакты, портфолио, изображения, навигацию или превратить страницу в лендинг.</p>
-      </article>
-      <article class="panel">
-        <h2>Для кого</h2>
-        <p>Для аккаунта <strong>tarasov-star</strong> как первая аккуратная публикация на GitHub Pages или в репозитории.</p>
-      </article>
+    <section class="section">
+      <div class="container">
+        <div class="cta-panel">
+          <div>
+            <p class="kicker">Почему новая версия сильнее</p>
+            <h2>Сайт, который ведёт к заявке.</h2>
+          </div>
+          <p>
+            Мы сохранили факты и предложения МПК Мебель, но перестроили подачу:
+            усилили первый экран, убрали визуальный шум, собрали доверие в понятные блоки,
+            сделали CTA последовательными и добавили форму, которая отправляет заявку прямо в WhatsApp.
+          </p>
+        </div>
+      </div>
     </section>
 
-    <section class="actions">
-      <a class="button primary" href="https://github.com/tarasov-star/test-1">Открыть репозиторий</a>
-      <a class="button secondary" href="https://github.com/tarasov-star">Профиль GitHub</a>
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="kicker">Портфолио</p>
+            <h2>Реальные проекты.</h2>
+          </div>
+          <p class="lead">
+            В основе те же направления, что и на текущем сайте: кухни, шкафы, гардеробные,
+            мебель для ванной и комплексная меблировка квартир и домов.
+          </p>
+        </div>
+
+        <div class="portfolio-grid">
+          <article class="portfolio-card large">
+            <img src="https://f2.lpcdn.site/a934f26ab5ebf35db5768a852aaa764e/4dcfbc0f93a15ed7e28df828f813ce95.jpg" alt="Кухня на заказ">
+            <div class="portfolio-body">
+              <h3>Кухни на заказ</h3>
+              <p>Проектируем кухню под точные размеры помещения, сценарий хранения и стиль интерьера.</p>
+            </div>
+          </article>
+
+          <article class="portfolio-card tall">
+            <img src="https://f2.lpcdn.site/a934f26ab5ebf35db5768a852aaa764e/2ac274bfc19b4af5a2f9575564415dd1.jpg" alt="Шкаф и встроенные системы хранения">
+            <div class="portfolio-body">
+              <h3>Шкафы и системы хранения</h3>
+              <p>От нишевых решений до полноценных встроенных шкафов под потолок.</p>
+            </div>
+          </article>
+
+          <article class="portfolio-card small">
+            <img src="https://f2.lpcdn.site/a934f26ab5ebf35db5768a852aaa764e/37a7981f381d6b0104fa65f17966af12.jpg" alt="Гардеробная на заказ">
+            <div class="portfolio-body">
+              <h3>Гардеробные</h3>
+              <p>Сценарии хранения, которые экономят пространство и делают повседневность удобнее.</p>
+            </div>
+          </article>
+
+          <article class="portfolio-card small">
+            <img src="https://f2.lpcdn.site/a934f26ab5ebf35db5768a852aaa764e/183f3fc95b614966a792c27a11894692.jpg" alt="ТВ-зона и мебель в гостиную">
+            <div class="portfolio-body">
+              <h3>Гостиные и ТВ-зоны</h3>
+              <p>Комплексная мебель, которая собирает интерьер в единую композицию.</p>
+            </div>
+          </article>
+
+          <article class="portfolio-card small">
+            <img src="https://f2.lpcdn.site/bf54224fbc5326e3615af862a1e79ea7/e04960e5f9f8a4e7db380346bf2e41c5.jpg" alt="Мебель для ванной комнаты">
+            <div class="portfolio-body">
+              <h3>Мебель для ванной</h3>
+              <p>Практичные решения для влажных помещений с точной подгонкой по размерам.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="kicker">Галерея работ</p>
+            <h2>Больше выполненных проектов.</h2>
+          </div>
+          <p class="lead">
+            Отдельный блок с визуалами, чтобы клиент сразу видел уровень исполнения, материалы и стилистику работ.
+          </p>
+        </div>
+
+        <div class="gallery-grid">
+          <article class="gallery-card">
+            <img src="https://f1.lpcdn.site/c16a5320fa475530d9583c34fd356ef5/85600fbdcfcd98c68092c8ee78fef443.jpg" alt="Светлая кухня на заказ">
+            <div class="gallery-body">
+              <h3>Светлая кухня</h3>
+              <p>Чистая композиция, спокойные фасады и акцент на удобстве ежедневного использования.</p>
+            </div>
+          </article>
+          <article class="gallery-card">
+            <img src="https://f1.lpcdn.site/c16a5320fa475530d9583c34fd356ef5/d07611e14f2f6512eb82382ddb5812dd.jpg" alt="Кухня с островом">
+            <div class="gallery-body">
+              <h3>Кухня с островом</h3>
+              <p>Решение для просторного интерьера, где важны хранение, посадка и единый визуальный ритм.</p>
+            </div>
+          </article>
+          <article class="gallery-card">
+            <img src="https://f1.lpcdn.site/c16a5320fa475530d9583c34fd356ef5/ca0be5f5cd84b6891c5a611b252bc904.jpg" alt="Тёмная кухня на заказ">
+            <div class="gallery-body">
+              <h3>Тёмная кухня</h3>
+              <p>Более выразительный интерьер с акцентом на геометрию фасадов и фактуру материалов.</p>
+            </div>
+          </article>
+          <article class="gallery-card">
+            <img src="https://f2.lpcdn.site/a934f26ab5ebf35db5768a852aaa764e/f234deb7b83c8be21fdb45deaba2e61d.jpg" alt="Шкаф и встроенное хранение">
+            <div class="gallery-body">
+              <h3>Встроенное хранение</h3>
+              <p>Системы, которые точно работают с геометрией помещения и освобождают пространство.</p>
+            </div>
+          </article>
+          <article class="gallery-card">
+            <img src="https://f2.lpcdn.site/a934f26ab5ebf35db5768a852aaa764e/3d768e987db311be10b9c0676ed49998.jpg" alt="Гардеробная комната">
+            <div class="gallery-body">
+              <h3>Гардеробная</h3>
+              <p>Функциональная раскладка хранения под реальный сценарий жизни, а не под каталог.</p>
+            </div>
+          </article>
+          <article class="gallery-card">
+            <img src="https://f2.lpcdn.site/a934f26ab5ebf35db5768a852aaa764e/183f3fc95b614966a792c27a11894692.jpg" alt="Мебель для гостиной">
+            <div class="gallery-body">
+              <h3>Гостиная и ТВ-зона</h3>
+              <p>Единая мебельная композиция, которая собирает интерьер и работает на чистый визуальный образ.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="advantages">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="kicker">Преимущества</p>
+            <h2>Почему выбирают МПК Мебель.</h2>
+          </div>
+          <div class="intro-card">
+            <p>
+              На исходном сайте эти преимущества были разбросаны по разным блокам. Здесь мы собрали их в ясную систему:
+              почему клиенту удобно работать с МПК Мебель и за что он платит.
+            </p>
+          </div>
+        </div>
+
+        <div class="values-grid">
+          <article class="value-card">
+            <strong>01</strong>
+            <h3>Собственное производство и контроль качества</h3>
+            <p>Изготавливаем мебель сами, поэтому держим под контролем сроки, материалы и результат на каждом этапе.</p>
+          </article>
+          <article class="value-card">
+            <strong>02</strong>
+            <h3>Материалы и фурнитура под задачу</h3>
+            <p>Подбираем решения не по шаблону, а под интерьер, бюджет и реальную нагрузку в эксплуатации.</p>
+          </article>
+          <article class="value-card">
+            <strong>03</strong>
+            <h3>Точный замер и аккуратный монтаж</h3>
+            <p>Грамотный замер, чистая сборка и установка под ключ без передачи финального этапа на сторону.</p>
+          </article>
+          <article class="value-card">
+            <strong>04</strong>
+            <h3>Договор, гарантия и бесплатный выезд</h3>
+            <p>Работаем по договору, даём гарантию 1 год и выезжаем на замер по Краснодару бесплатно.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="kicker">Как работаем</p>
+            <h2>Как мы работаем.</h2>
+          </div>
+          <p class="lead">
+            Этот блок добавлен специально: он снимает тревогу клиента и показывает, что проект управляем.
+          </p>
+        </div>
+
+        <div class="process-grid">
+          <article class="process-card">
+            <strong>1</strong>
+            <h3>Заявка и замер</h3>
+            <p>Обсуждаем задачу, выезжаем на объект и собираем всю базу для точного проекта.</p>
+          </article>
+          <article class="process-card">
+            <strong>2</strong>
+            <h3>Проект и согласование</h3>
+            <p>Подготавливаем проект мебели, подбираем материалы и согласуем итоговое решение с клиентом.</p>
+          </article>
+          <article class="process-card">
+            <strong>3</strong>
+            <h3>Изготовление</h3>
+            <p>Запускаем мебель в производство и контролируем качество на всех этапах изготовления.</p>
+          </article>
+          <article class="process-card">
+            <strong>4</strong>
+            <h3>Доставка, монтаж и гарантия</h3>
+            <p>Устанавливаем мебель на объекте и передаём готовый результат с гарантией 1 год.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container story-grid">
+        <div class="story">
+          <p class="kicker">О компании</p>
+          <h2>Производство, команда, гарантия.</h2>
+          <p>
+            Компания производит мебель на заказ по индивидуальным размерам, работает в центре Краснодара
+            и ориентируется на сочетание точной инженерии, эстетики и удобства в эксплуатации.
+          </p>
+          <p>
+            В старой версии сайта эти смыслы были, но терялись среди однотипных карточек и повторов.
+            Здесь они собраны в более уверенный премиальный образ бренда.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Кухни</span>
+            <span class="pill">Шкафы</span>
+            <span class="pill">Гардеробные</span>
+            <span class="pill">Мебель для ванной</span>
+            <span class="pill">Меблировка под ключ</span>
+          </div>
+        </div>
+
+        <div class="story-stack">
+          <article class="story-card">
+            <h3>Производство</h3>
+            <ul>
+              <li>Современное оборудование для точности и надёжности каждого изделия.</li>
+              <li>Контроль качества на этапе материалов, изготовления и финальной сборки.</li>
+              <li>Производство в центре Краснодара, район КТ «Аврора».</li>
+            </ul>
+          </article>
+          <article class="story-card">
+            <h3>Команда</h3>
+            <ul>
+              <li>Опытные дизайнеры помогают перевести идеи в работающий проект.</li>
+              <li>Ассортимент решений подходит как для классических, так и для современных интерьеров.</li>
+              <li>Замерщики и монтажники ведут проект до конечного результата.</li>
+            </ul>
+          </article>
+          <article class="story-card">
+            <h3>Гарантия</h3>
+            <ul>
+              <li>На все изделия действует гарантия 1 год.</li>
+              <li>Работаем по договору и фиксируем ключевые обязательства.</li>
+              <li>Клиент получает уверенность не только в дизайне, но и в долговечности.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="offers">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="kicker">Специальные предложения</p>
+            <h2>Специальные предложения.</h2>
+          </div>
+          <p class="lead">
+            Акции перенесены из исходного сайта, но оформлены как понятные коммерческие офферы.
+          </p>
+        </div>
+
+        <div class="offers-grid">
+          <article class="offer-card">
+            <h3>Рассрочка</h3>
+            <p>Если проект важен сейчас, а комфортнее оплатить поэтапно, обсудим удобный формат запуска.</p>
+          </article>
+          <article class="offer-card">
+            <h3>Подарок к заказу</h3>
+            <p>Для отдельных проектов можно получить дополнительный бонус при заключении договора.</p>
+          </article>
+          <article class="offer-card">
+            <h3>Скидка</h3>
+            <p>Предусмотрены специальные условия на отдельные категории мебели и комплексные заказы.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="reviews">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="kicker">Отзывы</p>
+            <h2>Отзывы и репутация.</h2>
+          </div>
+          <p class="lead">
+            На текущем сайте блок отзывов дублируется и визуально шумит. Здесь отзывы представлены как часть доверия,
+            а основной акцент перенесён на реальные площадки компании.
+          </p>
+        </div>
+
+        <div class="reviews-grid">
+          <article class="review-card">
+            <h3>Отзывы клиентов</h3>
+            <p>
+              Для новой версии мы убрали повторяющиеся блоки и оставили главное:
+              реальные отзывы лучше смотреть на внешней площадке, где они вызывают больше доверия.
+            </p>
+            <a class="source" href="https://yandex.ru/maps/org/mpk_mebel/215325473047/reviews/" target="_blank" rel="noreferrer">
+              Открыть отзывы на Яндекс Картах
+            </a>
+          </article>
+          <article class="review-card">
+            <h3>Что особенно важно клиентам</h3>
+            <p>
+              Точность замера, аккуратный монтаж, понятная коммуникация и соответствие результата проекту.
+              Именно эти точки доверия вынесены в новый сценарий сайта.
+            </p>
+          </article>
+          <article class="review-card">
+            <h3>Почему раздел стал сильнее</h3>
+            <p>
+              Вместо визуального дубляжа мы сделали блок полезным: он не просто заполняет экран,
+              а помогает перейти к проверке репутации и следующему действию.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="kicker">FAQ</p>
+            <h2>Частые вопросы.</h2>
+          </div>
+          <p class="lead">
+            Этот блок не меняет факты, а помогает клиенту быстрее принять решение и уменьшает трение на пути к заявке.
+          </p>
+        </div>
+
+        <div class="faq-grid">
+          <article class="faq-card">
+            <h3>Что входит в работу?</h3>
+            <p>Замер, проект, производство, доставка, сборка и монтаж под ключ.</p>
+          </article>
+          <article class="faq-card">
+            <h3>Какую мебель можно заказать?</h3>
+            <p>Кухни, шкафы, гардеробные, мебель для ванной и другие корпусные решения по индивидуальному проекту.</p>
+          </article>
+          <article class="faq-card">
+            <h3>Какие условия по выезду и гарантии?</h3>
+            <p>Замер по Краснодару бесплатный, а на изделия действует гарантия 1 год.</p>
+          </article>
+          <article class="faq-card">
+            <h3>Как начать проект?</h3>
+            <p>Проще всего написать в WhatsApp или Telegram, после чего мы согласуем замер и дальнейшие шаги.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="container">
+        <div class="cta-panel">
+          <div>
+            <p class="kicker">Финальный оффер</p>
+            <h2>Запишитесь на бесплатный дизайн-проект мебели.</h2>
+            <p>
+              Оставьте контакты и коротко опишите задачу. Кнопка ниже не теряет заявку:
+              она собирает сообщение и отправляет его прямо в WhatsApp МПК Мебель.
+            </p>
+          </div>
+          <div class="hero-actions">
+            <a class="button primary" href="#contacts">Оставить заявку</a>
+            <a class="button light" href="tel:+79286682651">Позвонить сейчас</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contacts">
+      <div class="container contact-grid">
+        <div class="contact-card contact-info">
+          <p class="kicker">Контакты</p>
+            <h2>Контакты.</h2>
+          <p>
+            Офис компании находится в Краснодаре, а для быстрого старта удобнее всего написать в WhatsApp.
+            Так менеджер сразу увидит ваш запрос и поможет перейти к замеру и проекту.
+          </p>
+
+          <div class="contact-list">
+            <div>
+              <strong>Телефон</strong>
+              <a href="tel:+79286682651">+7 (928) 668-26-51</a>
+            </div>
+            <div>
+              <strong>Адрес</strong>
+              <span>г. Краснодар, ул. Ростовское ш., 14/1</span>
+            </div>
+            <div>
+              <strong>Email</strong>
+              <a href="mailto:mpk-mebel@yandex.ru">mpk-mebel@yandex.ru</a>
+            </div>
+          </div>
+
+          <div class="contact-links" style="margin-top: 24px;">
+            <a class="button light" href="https://wa.me/79286682651" target="_blank" rel="noreferrer">WhatsApp</a>
+            <a class="button light" href="https://t.me/mpk_mebel" target="_blank" rel="noreferrer">Telegram</a>
+            <a class="button light" href="https://yandex.ru/maps/-/CHrFrB7w" target="_blank" rel="noreferrer">Карта</a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <p class="kicker">Заявка на проект</p>
+          <h3>Оставьте заявку.</h3>
+          <p>Так вы сможете быстро отправить заявку без отдельной CRM и без потери контакта.</p>
+
+          <form class="contact-form" id="lead-form">
+            <label>
+              Имя
+              <input type="text" name="name" placeholder="Как к вам обращаться">
+            </label>
+            <label>
+              Телефон
+              <input type="tel" name="phone" placeholder="+7 (___) ___-__-__">
+            </label>
+            <label>
+              Что нужно изготовить
+              <textarea name="project" placeholder="Например: кухня, шкаф в нишу, гардеробная, мебель для ванной"></textarea>
+            </label>
+            <button class="button primary" type="submit">Отправить в WhatsApp</button>
+            <p class="form-note">
+              Нажимая кнопку, вы подтверждаете согласие на обработку персональных данных для связи по вашему запросу.
+            </p>
+          </form>
+        </div>
+      </div>
     </section>
   </main>
+
+  <footer>
+    <div class="container footer-shell">
+      <div>
+        <strong>МПК Мебель</strong>
+        <p>Мебель по индивидуальному проекту в Краснодаре.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#projects">Портфолио</a>
+        <a href="#advantages">Преимущества</a>
+        <a href="#offers">Акции</a>
+        <a href="#contacts">Контакты</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const leadForm = document.getElementById("lead-form");
+
+    leadForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const formData = new FormData(leadForm);
+      const name = (formData.get("name") || "").toString().trim();
+      const phone = (formData.get("phone") || "").toString().trim();
+      const project = (formData.get("project") || "").toString().trim();
+
+      const lines = [
+        "Здравствуйте! Хочу обсудить мебель на заказ.",
+        name ? "Имя: " + name : "",
+        phone ? "Телефон: " + phone : "",
+        project ? "Задача: " + project : ""
+      ].filter(Boolean);
+
+      const message = encodeURIComponent(lines.join("\n"));
+      window.open("https://wa.me/79286682651?text=" + message, "_blank", "noopener");
+    });
+
+    const heroSequence = [
+      ...document.querySelectorAll(".hero-copy > *"),
+      ...document.querySelectorAll(".hero-meta .metric")
+    ];
+
+    heroSequence.forEach(function (item, index) {
+      setTimeout(function () {
+        item.classList.add("is-visible");
+      }, 120 + index * 90);
+    });
+
+    const revealGroups = [
+      ".section-header",
+      ".intro-card",
+      ".portfolio-card",
+      ".value-card",
+      ".process-card",
+      ".story",
+      ".story-card",
+      ".offer-card",
+      ".review-card",
+      ".faq-card",
+      ".cta-panel",
+      ".contact-card",
+      ".footer-shell"
+    ];
+
+    revealGroups.forEach(function (selector) {
+      document.querySelectorAll(selector).forEach(function (element, index) {
+        element.setAttribute("data-reveal", "");
+        element.style.setProperty("--delay", (index % 3) * 90 + "ms");
+      });
+    });
+
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.16,
+      rootMargin: "0px 0px -8% 0px"
+    });
+
+    document.querySelectorAll("[data-reveal]").forEach(function (element) {
+      observer.observe(element);
+    });
+  </script>
 </body>
 </html>
