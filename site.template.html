@@ -24,9 +24,9 @@
       --bg-soft: #1a1815;
       --bg-footer: #0a0908;
       --text: #f5f0eb;
-      --muted: rgba(245, 240, 235, 0.55);
-      --muted-soft: rgba(245, 240, 235, 0.45);
-      --muted-faint: rgba(245, 240, 235, 0.35);
+      --muted: rgba(245, 240, 235, 0.65);
+      --muted-soft: rgba(245, 240, 235, 0.56);
+      --muted-faint: rgba(245, 240, 235, 0.5);
       --accent: #b8956a;
       --line: rgba(245, 240, 235, 0.08);
       --line-strong: rgba(245, 240, 235, 0.12);
@@ -43,12 +43,13 @@
       scroll-behavior: smooth;
     }
 
-    body {
-      margin: 0;
-      font-family: "Manrope", sans-serif;
-      color: var(--text);
-      background: var(--bg);
-    }
+body {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  overflow-x: hidden;
+}
 
     img {
       display: block;
@@ -59,6 +60,24 @@
     a {
       color: inherit;
       text-decoration: none;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      z-index: 9999;
+      padding: 12px 24px;
+      border-radius: var(--radius);
+      background: var(--accent);
+      color: var(--bg);
+      font-weight: 700;
+    }
+
+    .skip-link:focus {
+      position: fixed;
+      left: 8px;
+      top: 8px;
     }
 
     button,
@@ -136,7 +155,106 @@
     .contact-links a {
       color: var(--muted);
       font-size: 14px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
       transition: color 0.25s var(--ease);
+    }
+
+    .menu-toggle,
+    .menu-close {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .menu-icon,
+    .menu-close::before,
+    .menu-close::after {
+      position: relative;
+      width: 20px;
+      height: 2px;
+      background: currentColor;
+      display: block;
+      content: "";
+    }
+
+    .menu-icon::before,
+    .menu-icon::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 20px;
+      height: 2px;
+      background: currentColor;
+    }
+
+    .menu-icon::before {
+      top: -6px;
+    }
+
+    .menu-icon::after {
+      top: 6px;
+    }
+
+    .menu-close {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      border: 0;
+    }
+
+    .menu-close::before {
+      transform: rotate(45deg);
+    }
+
+    .menu-close::after {
+      position: absolute;
+      transform: rotate(-45deg);
+    }
+
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      gap: 32px;
+      padding: 40px 24px;
+      background: rgba(15, 14, 12, 0.98);
+      transform: translateX(100%);
+      transition: transform 0.3s var(--ease);
+    }
+
+    .mobile-menu.is-open {
+      transform: translateX(0);
+    }
+
+    .mobile-menu nav {
+      display: grid;
+      justify-items: center;
+      gap: 24px;
+    }
+
+    .mobile-menu nav a {
+      min-height: 44px;
+      color: var(--text);
+      font-size: 22px;
+    }
+
+    .mobile-menu-contacts {
+      display: grid;
+      justify-items: center;
+      gap: 14px;
+      color: var(--muted);
     }
 
     .nav a:hover,
@@ -230,15 +348,45 @@
       transform: translateY(-2px);
     }
 
+    .button:active {
+      transform: scale(0.97);
+    }
+
+    .button:focus-visible,
+    .nav a:focus-visible,
+    .contacts a:focus-visible,
+    .footer-links a:focus-visible,
+    .contact-links a:focus-visible,
+    .quiz-option:focus-visible,
+    .portfolio-card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
     .button.primary {
       background: var(--accent);
       color: var(--bg);
+    }
+
+    .button.primary:hover {
+      background: #c6a57a;
     }
 
     .button.secondary {
       border-color: rgba(245, 240, 235, 0.2);
       color: var(--text);
       background: transparent;
+    }
+
+    .button.secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(245, 240, 235, 0.4);
+    }
+
+    .button[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
     }
 
     .hero {
@@ -281,6 +429,10 @@
       max-width: 540px;
       margin-top: 26px;
       font-size: 16px;
+    }
+
+    .lead {
+      color: var(--muted);
     }
 
     .hero-actions {
@@ -374,49 +526,49 @@
       margin-bottom: 44px;
     }
 
-    .categories-grid {
+    .quick-nav {
       display: grid;
-      gap: 26px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      overflow: hidden;
     }
 
-    .category-row {
+    .quick-card {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0;
+      gap: 12px;
+      min-height: 140px;
+      padding: 18px 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(26, 24, 21, 0.72);
+      transition:
+        border-color 0.25s var(--ease),
+        transform 0.25s var(--ease);
     }
 
-    .category-item {
-      display: grid;
-      grid-template-columns: 72px 1fr;
-      gap: 16px;
-      align-items: center;
-      padding: 8px 22px 8px 0;
-      border-right: 1px solid var(--line);
+    .quick-card:hover {
+      border-color: rgba(184, 149, 106, 0.45);
+      transform: translateY(-2px);
     }
 
-    .category-item:last-child {
-      border-right: 0;
-      padding-right: 0;
+    .quick-card svg {
+      width: 24px;
+      height: 24px;
+      color: var(--accent);
     }
 
-    .value-number {
-      font-size: 48px;
-      color: rgba(184, 149, 106, 0.2);
-      line-height: 1;
-    }
-
-    .category-copy h3 {
+    .quick-card h3 {
       font-family: "Manrope", sans-serif;
       font-size: 18px;
       font-weight: 500;
       letter-spacing: 0;
     }
 
-    .category-copy p {
-      margin-top: 6px;
-      color: var(--muted-soft);
-      font-size: 14px;
-      line-height: 1.6;
+    .quick-card p {
+      color: var(--accent);
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: auto;
     }
 
     .portfolio-top {
@@ -438,6 +590,7 @@
       position: relative;
       overflow: hidden;
       border-radius: var(--radius);
+      min-width: 0;
     }
 
     .portfolio-card.large {
@@ -510,6 +663,24 @@
       display: flex;
       justify-content: center;
       margin-top: 22px;
+    }
+
+    .inline-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 24px 26px;
+      border: 1px solid rgba(184, 149, 106, 0.22);
+      border-radius: var(--radius);
+      background: rgba(184, 149, 106, 0.08);
+    }
+
+    .inline-cta strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 18px;
+      font-weight: 700;
     }
 
     #advantages {
@@ -586,6 +757,21 @@
       right: 12.5%;
       height: 1px;
       background: var(--line-strong);
+    }
+
+    .process-line::after {
+      content: "";
+      position: absolute;
+      top: 24px;
+      left: 12.5%;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 1s var(--ease);
+    }
+
+    .process-line.is-visible::after {
+      width: 75%;
     }
 
     .process-card {
@@ -851,6 +1037,12 @@
       grid-template-columns: 1fr 24px;
       gap: 18px;
       align-items: center;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      text-align: left;
       cursor: pointer;
     }
 
@@ -969,6 +1161,15 @@
       gap: 18px;
     }
 
+    .contact-links a {
+      min-width: 44px;
+      min-height: 44px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      justify-content: center;
+    }
+
     .contact-map {
       margin-top: 30px;
       overflow: hidden;
@@ -1007,6 +1208,7 @@
       background: transparent;
       border-radius: 0;
       outline: none;
+      font-size: 16px;
     }
 
     .contact-form input::placeholder,
@@ -1022,6 +1224,34 @@
     .contact-form textarea {
       min-height: 120px;
       resize: vertical;
+    }
+
+    .field-error {
+      display: block;
+      margin-top: 8px;
+      color: #ef8d8d;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .field-invalid input,
+    .field-invalid textarea {
+      border-color: #ef8d8d;
+    }
+
+    .form-success {
+      display: none;
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: var(--radius);
+      background: rgba(76, 175, 80, 0.16);
+      color: #b4e2ba;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .form-success.is-visible {
+      display: block;
     }
 
     .form-note {
@@ -1102,6 +1332,198 @@
     .quiz-option.is-selected {
       border-color: rgba(184, 149, 106, 0.45);
       transform: translateY(-1px);
+    }
+
+    .modal,
+    .lightbox,
+    .callback-panel {
+      position: fixed;
+      z-index: 70;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s var(--ease);
+    }
+
+    .modal.is-open,
+    .lightbox.is-open,
+    .callback-panel.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal,
+    .lightbox {
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+    }
+
+    .modal-card,
+    .lightbox-card {
+      width: min(100%, 460px);
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--bg-soft);
+      transform: scale(0.95);
+      transition: transform 0.25s var(--ease);
+    }
+
+    .modal.is-open .modal-card,
+    .lightbox.is-open .lightbox-card {
+      transform: scale(1);
+    }
+
+    .modal-close,
+    .lightbox-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .modal-form {
+      display: grid;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .modal-form input {
+      width: 100%;
+      padding: 14px 0;
+      border: 0;
+      border-bottom: 1px solid rgba(245, 240, 235, 0.12);
+      font-size: 16px;
+      color: var(--text);
+      background: transparent;
+    }
+
+    .callback-widget {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 65;
+      display: grid;
+      justify-items: end;
+      gap: 12px;
+    }
+
+    .callback-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--bg);
+      cursor: pointer;
+      transform: translateY(18px);
+      opacity: 0;
+      transition:
+        transform 0.3s var(--ease),
+        opacity 0.3s var(--ease);
+    }
+
+    .callback-toggle.is-visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .callback-panel {
+      right: 0;
+      bottom: 72px;
+      width: min(320px, calc(100vw - 24px));
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--bg-soft);
+      transform: translateY(10px);
+      transition:
+        transform 0.25s var(--ease),
+        opacity 0.25s var(--ease);
+    }
+
+    .callback-panel.is-open {
+      transform: translateY(0);
+    }
+
+    .callback-panel form {
+      display: grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .callback-panel input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      font-size: 16px;
+      color: var(--text);
+      background: transparent;
+    }
+
+    .callback-note {
+      display: none;
+      color: #b4e2ba;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .callback-note.is-visible {
+      display: block;
+    }
+
+    .lightbox-card {
+      width: min(90vw, 1200px);
+      max-height: 90vh;
+      position: relative;
+      padding: 56px 56px 24px;
+      background: rgba(15, 14, 12, 0.98);
+    }
+
+    .lightbox-image {
+      width: 100%;
+      max-height: 72vh;
+      object-fit: contain;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      width: 40px;
+      height: 40px;
+      margin-top: -20px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.16);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .lightbox-prev {
+      left: 12px;
+    }
+
+    .lightbox-next {
+      right: 12px;
+    }
+
+    .lightbox-caption {
+      margin-top: 16px;
+      text-align: center;
+      color: var(--muted);
     }
 
     .quiz-form {
@@ -1294,8 +1716,13 @@
         gap: 18px;
       }
 
-      .nav {
+      .nav,
+      .contacts {
         display: none;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
       }
 
       .hero {
@@ -1313,7 +1740,6 @@
       }
 
       .stats-row,
-      .category-row,
       .offers-grid,
       .process-line,
       .story-stack,
@@ -1330,13 +1756,45 @@
       }
 
       .portfolio-grid {
-        grid-template-columns: 1fr;
-        grid-auto-rows: 240px;
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 85vw;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding: 0 20px 8px;
+        margin: 0 -20px;
+        gap: 12px;
       }
 
+      .portfolio-card,
       .portfolio-card.large {
         grid-column: span 1;
         grid-row: span 1;
+        min-height: 280px;
+        scroll-snap-align: center;
+      }
+
+      .quick-nav {
+        grid-auto-flow: column;
+        grid-auto-columns: 140px;
+        overflow-x: auto;
+        padding-bottom: 8px;
+      }
+
+      .inline-cta {
+        min-width: 85vw;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .callback-widget {
+        right: 12px;
+        bottom: 84px;
+      }
+
+      .callback-toggle {
+        width: 48px;
+        height: 48px;
       }
 
       .quiz-card {
@@ -1361,6 +1819,14 @@
         opacity: 1;
         pointer-events: auto;
         transform: translateY(0);
+      }
+
+      .contact-card:last-child {
+        padding: 20px;
+      }
+
+      .contact-form textarea {
+        min-height: 100px;
       }
     }
   </style>
@@ -1428,16 +1894,18 @@
   </script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Перейти к содержимому</a>
   <header class="topbar">
     <div class="container topbar-inner">
       <a class="brand" href="#top">
         <img class="brand-logo" src="assets/logo.png" alt="МПК Мебель" width="269" height="108">
       </a>
-      <nav class="nav">
+      <nav class="nav" aria-label="Основная навигация">
         <a href="#projects">Проекты</a>
         <a href="#advantages">Преимущества</a>
         <a href="#offers">Акции</a>
         <a href="#reviews">Отзывы</a>
+        <a href="/blog/">Блог</a>
         <a href="#contacts">Контакты</a>
       </nav>
       <div class="contacts">
@@ -1445,20 +1913,38 @@
         <a href="https://wa.me/79286682651" target="_blank" rel="noreferrer">WhatsApp</a>
         <a href="https://t.me/mpk_mebel" target="_blank" rel="noreferrer">Telegram</a>
       </div>
+      <button class="menu-toggle" type="button" aria-label="Открыть меню" aria-controls="mobile-menu" aria-expanded="false">
+        <span class="menu-icon"></span>
+      </button>
     </div>
   </header>
 
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <button class="menu-close" type="button" aria-label="Закрыть меню"></button>
+    <nav aria-label="Мобильная навигация">
+      <a href="#projects">Проекты</a>
+      <a href="#advantages">Преимущества</a>
+      <a href="#offers">Акции</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="/blog/">Блог</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <div class="mobile-menu-contacts">
+      <a href="tel:+79286682651">+7 (928) 668-26-51</a>
+      <a href="https://wa.me/79286682651" target="_blank" rel="noreferrer">WhatsApp</a>
+      <a href="https://t.me/mpk_mebel" target="_blank" rel="noreferrer">Telegram</a>
+    </div>
+  </div>
+
   <main id="top">
+    <div id="main-content"></div>
     <section class="hero">
       <div class="hero-shell">
         <div class="container hero-grid">
           <div class="hero-copy">
             <span class="eyebrow">Собственное производство в Краснодаре</span>
             <h1>Мебель, которая выглядит как часть интерьера</h1>
-            <p>
-              Кухни, шкафы, гардеробные и корпусная мебель по индивидуальным размерам.
-              Проектируем под планировку, стиль и сценарий жизни, а результат собираем и устанавливаем под ключ.
-            </p>
+            <p>Кухни, шкафы и гардеробные по индивидуальному проекту в Краснодаре.</p>
             <div class="hero-actions cta-actions">
               <a class="button primary" href="#contacts">Оставить заявку</a>
               <a class="button secondary" href="https://wa.me/79286682651" target="_blank" rel="noreferrer">Написать в WhatsApp</a>
@@ -1479,19 +1965,19 @@
           <div class="stats-row">
             <div class="metric">
               <span>Проекты</span>
-              <strong>500+ реализовано</strong>
+              <strong data-countup="500">500+</strong>
             </div>
             <div class="metric">
               <span>Опыт</span>
-              <strong>5 лет в мебели</strong>
+              <strong data-countup="5">5 лет</strong>
             </div>
             <div class="metric">
-              <span>Направления</span>
-              <strong>6 типов мебели</strong>
+              <span>Замер</span>
+              <strong data-countup="0">0 ₽</strong>
             </div>
             <div class="metric">
               <span>Гарантия</span>
-              <strong>1 год на изделия</strong>
+              <strong data-countup="1">1 год</strong>
             </div>
           </div>
         </div>
@@ -1502,58 +1988,37 @@
       <div class="container">
         <div class="categories-header">
           <div>
-            <div class="label">Направления</div>
-            <h2>Категории мебели</h2>
+            <div class="label">Быстрый переход</div>
+            <h2>Выберите ваш тип проекта</h2>
           </div>
         </div>
 
-        <div class="categories-grid">
-          <div class="category-row">
-            <article class="category-item">
-              <div class="value-number">01</div>
-              <div class="category-copy">
-                <h3>Кухни</h3>
-                <p>Под размеры помещения и сценарий хранения.</p>
-              </div>
-            </article>
-            <article class="category-item">
-              <div class="value-number">02</div>
-              <div class="category-copy">
-                <h3>Шкафы</h3>
-                <p>Встроенные и корпусные решения под интерьер.</p>
-              </div>
-            </article>
-            <article class="category-item">
-              <div class="value-number">03</div>
-              <div class="category-copy">
-                <h3>Гардеробные</h3>
-                <p>Системы хранения под повседневный ритм жизни.</p>
-              </div>
-            </article>
-          </div>
-          <div class="category-row">
-            <article class="category-item">
-              <div class="value-number">04</div>
-              <div class="category-copy">
-                <h3>Прихожие</h3>
-                <p>Функциональные входные зоны без визуального шума.</p>
-              </div>
-            </article>
-            <article class="category-item">
-              <div class="value-number">05</div>
-              <div class="category-copy">
-                <h3>ТВ-зоны</h3>
-                <p>Чистые композиции для гостиных и общих пространств.</p>
-              </div>
-            </article>
-            <article class="category-item">
-              <div class="value-number">06</div>
-              <div class="category-copy">
-                <h3>Мебель для ванной</h3>
-                <p>Практичные решения для влажных помещений.</p>
-              </div>
-            </article>
-          </div>
+        <div class="quick-nav">
+          <a class="quick-card" href="#portfolio-kitchens">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 6H20V18H4V6Z" stroke="currentColor" stroke-width="1.5"/><path d="M9 10V18M15 10V18M4 10H20" stroke="currentColor" stroke-width="1.5"/></svg>
+            <h3>Кухни</h3>
+            <p>от 180 000 ₽</p>
+          </a>
+          <a class="quick-card" href="#portfolio-wardrobes">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M6 4H18V20H6V4Z" stroke="currentColor" stroke-width="1.5"/><path d="M12 4V20" stroke="currentColor" stroke-width="1.5"/></svg>
+            <h3>Шкафы</h3>
+            <p>от 85 000 ₽</p>
+          </a>
+          <a class="quick-card" href="#portfolio-dressing">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 7H19V19H5V7Z" stroke="currentColor" stroke-width="1.5"/><path d="M8 7V5H16V7" stroke="currentColor" stroke-width="1.5"/></svg>
+            <h3>Гардеробные</h3>
+            <p>от 120 000 ₽</p>
+          </a>
+          <a class="quick-card" href="#portfolio-bathroom">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M7 11H17V18H7V11Z" stroke="currentColor" stroke-width="1.5"/><path d="M9 11V8C9 6.89543 9.89543 6 11 6H13" stroke="currentColor" stroke-width="1.5"/></svg>
+            <h3>Ванная</h3>
+            <p>от 95 000 ₽</p>
+          </a>
+          <a class="quick-card" href="#contacts">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 7H20V17H4V7Z" stroke="currentColor" stroke-width="1.5"/><path d="M8 11H16M8 15H13" stroke="currentColor" stroke-width="1.5"/></svg>
+            <h3>Комплексная меблировка</h3>
+            <p>от 500 000 ₽</p>
+          </a>
         </div>
       </div>
     </section>
@@ -1569,75 +2034,82 @@
         </div>
 
         <div class="portfolio-grid">
-          <article class="portfolio-card large">
-            <img src="https://f2.lpcdn.site/a934f26ab5ebf35db5768a852aaa764e/4dcfbc0f93a15ed7e28df828f813ce95.jpg" alt="Кухня на заказ" width="1200" height="1200">
+          <article class="portfolio-card large" id="portfolio-kitchens" tabindex="0" data-lightbox-title="Кухня в современном интерьере">
+            <img src="https://f2.lpcdn.site/a934f26ab5ebf35db5768a852aaa764e/4dcfbc0f93a15ed7e28df828f813ce95.jpg" alt="Светлая кухня с белыми матовыми фасадами, встроенной техникой и деревянной столешницей в современном интерьере" width="1200" height="1200">
             <div class="portfolio-body">
               <h3>Кухня в современном интерьере</h3>
-              <p>Кухни на заказ</p>
+              <p>Фасады МДФ эмаль, фурнитура Blum, столешница под тёплое дерево и встроенная техника.</p>
               <span class="project-price">от 180 000 ₽</span>
             </div>
           </article>
-          <article class="portfolio-card small">
-            <img src="https://f2.lpcdn.site/a934f26ab5ebf35db5768a852aaa764e/2ac274bfc19b4af5a2f9575564415dd1.jpg" alt="Шкафы и системы хранения" loading="lazy" width="1200" height="1200">
+          <article class="portfolio-card small" id="portfolio-wardrobes" tabindex="0" data-lightbox-title="Система хранения">
+            <img src="https://f2.lpcdn.site/a934f26ab5ebf35db5768a852aaa764e/2ac274bfc19b4af5a2f9575564415dd1.jpg" alt="Высокий встроенный шкаф от пола до потолка с гладкими фасадами и скрытыми ручками" loading="lazy" width="1200" height="1200">
             <div class="portfolio-body">
               <h3>Система хранения</h3>
-              <p>Шкафы</p>
+              <p>Вместимость на 40% больше стандартного шкафа за счёт индивидуальной планировки секций.</p>
               <span class="project-price">от 85 000 ₽</span>
             </div>
           </article>
-          <article class="portfolio-card small">
-            <img src="https://f2.lpcdn.site/a934f26ab5ebf35db5768a852aaa764e/37a7981f381d6b0104fa65f17966af12.jpg" alt="Гардеробная" loading="lazy" width="1200" height="1200">
+          <article class="portfolio-card small" id="portfolio-dressing" tabindex="0" data-lightbox-title="Отдельная гардеробная">
+            <img src="https://f2.lpcdn.site/a934f26ab5ebf35db5768a852aaa764e/37a7981f381d6b0104fa65f17966af12.jpg" alt="Просторная гардеробная комната с открытыми полками, штангами для одежды и мягкой подсветкой" loading="lazy" width="1200" height="1200">
             <div class="portfolio-body">
               <h3>Отдельная гардеробная</h3>
-              <p>Гардеробные</p>
+              <p>Утренние сборы за 10 минут, когда одежда, обувь и аксессуары находятся на своих местах.</p>
               <span class="project-price">от 120 000 ₽</span>
             </div>
           </article>
-          <article class="portfolio-card small">
-            <img src="https://f1.lpcdn.site/c16a5320fa475530d9583c34fd356ef5/85600fbdcfcd98c68092c8ee78fef443.jpg" alt="Светлая кухня" loading="lazy" width="1200" height="1200">
+          <div class="inline-cta" data-reveal>
+            <div>
+              <strong>Нравится уровень и стиль работ?</strong>
+              <p>Обсудим ваш проект и согласуем бесплатный замер за 24 часа.</p>
+            </div>
+            <button class="button primary" type="button" data-open-modal>Записаться на замер</button>
+          </div>
+          <article class="portfolio-card small" tabindex="0" data-lightbox-title="Светлая кухня">
+            <img src="https://f1.lpcdn.site/c16a5320fa475530d9583c34fd356ef5/85600fbdcfcd98c68092c8ee78fef443.jpg" alt="Светлая кухня с белыми фасадами, высоким пеналом и лаконичной рабочей зоной" loading="lazy" width="1200" height="1200">
             <div class="portfolio-body">
               <h3>Светлая кухня</h3>
-              <p>Кухни</p>
+              <p>Мягкая палитра, скрытое хранение и чистая геометрия для спокойного современного интерьера.</p>
               <span class="project-price">от 210 000 ₽</span>
             </div>
           </article>
-          <article class="portfolio-card small">
-            <img src="https://f2.lpcdn.site/bf54224fbc5326e3615af862a1e79ea7/e04960e5f9f8a4e7db380346bf2e41c5.jpg" alt="Мебель для ванной" loading="lazy" width="1200" height="1200">
+          <article class="portfolio-card small" id="portfolio-bathroom" tabindex="0" data-lightbox-title="Мебель для ванной">
+            <img src="https://f2.lpcdn.site/bf54224fbc5326e3615af862a1e79ea7/e04960e5f9f8a4e7db380346bf2e41c5.jpg" alt="Подвесная мебель для ванной с тумбой под раковину и высоким шкафом в светлой плитке" loading="lazy" width="1200" height="1200">
             <div class="portfolio-body">
               <h3>Мебель для ванной</h3>
-              <p>Влажные помещения</p>
+              <p>Влагостойкие материалы, продуманная глубина тумбы и аккуратное хранение без визуального перегруза.</p>
               <span class="project-price">от 95 000 ₽</span>
             </div>
           </article>
-          <article class="portfolio-card small">
-            <img src="https://f1.lpcdn.site/c16a5320fa475530d9583c34fd356ef5/d07611e14f2f6512eb82382ddb5812dd.jpg" alt="Кухня с островом" loading="lazy" width="1200" height="1200">
+          <article class="portfolio-card small" tabindex="0" data-lightbox-title="Кухня с островом">
+            <img src="https://f1.lpcdn.site/c16a5320fa475530d9583c34fd356ef5/d07611e14f2f6512eb82382ddb5812dd.jpg" alt="Современная кухня с островом, верхней подсветкой и светлыми фасадами в просторной кухне-гостиной" loading="lazy" width="1200" height="1200">
             <div class="portfolio-body">
               <h3>Кухня с островом</h3>
-              <p>Кухни</p>
+              <p>Остров помогает разделить пространство кухни-гостиной и добавить больше рабочей поверхности для семьи.</p>
               <span class="project-price">от 260 000 ₽</span>
             </div>
           </article>
-          <article class="portfolio-card small is-extra">
-            <img src="https://f2.lpcdn.site/a934f26ab5ebf35db5768a852aaa764e/f234deb7b83c8be21fdb45deaba2e61d.jpg" alt="Встроенный шкаф" loading="lazy" width="1200" height="1200">
+          <article class="portfolio-card small is-extra" tabindex="0" data-lightbox-title="Встроенный шкаф">
+            <img src="https://f2.lpcdn.site/a934f26ab5ebf35db5768a852aaa764e/f234deb7b83c8be21fdb45deaba2e61d.jpg" alt="Встроенный шкаф-купе с гладкими фасадами в нише и аккуратным примыканием к стенам" loading="lazy" width="1200" height="1200">
             <div class="portfolio-body">
               <h3>Встроенный шкаф</h3>
-              <p>Шкафы-купе</p>
+              <p>Точная посадка в нишу, тихий ход фасадов и максимум хранения в сложной геометрии помещения.</p>
               <span class="project-price">от 110 000 ₽</span>
             </div>
           </article>
-          <article class="portfolio-card small is-extra">
-            <img src="https://f2.lpcdn.site/a934f26ab5ebf35db5768a852aaa764e/3d768e987db311be10b9c0676ed49998.jpg" alt="Гардеробная комната" loading="lazy" width="1200" height="1200">
+          <article class="portfolio-card small is-extra" tabindex="0" data-lightbox-title="Гардеробная комната">
+            <img src="https://f2.lpcdn.site/a934f26ab5ebf35db5768a852aaa764e/3d768e987db311be10b9c0676ed49998.jpg" alt="Гардеробная с открытыми секциями, обувными полками и местом для длинной одежды" loading="lazy" width="1200" height="1200">
             <div class="portfolio-body">
               <h3>Гардеробная комната</h3>
-              <p>Гардеробные</p>
+              <p>Продуманная система для семейного хранения, где каждая зона работает под реальный сценарий жизни.</p>
               <span class="project-price">от 140 000 ₽</span>
             </div>
           </article>
-          <article class="portfolio-card small is-extra">
-            <img src="https://f1.lpcdn.site/c16a5320fa475530d9583c34fd356ef5/ca0be5f5cd84b6891c5a611b252bc904.jpg" alt="Тёмная кухня" loading="lazy" width="1200" height="1200">
+          <article class="portfolio-card small is-extra" tabindex="0" data-lightbox-title="Тёмная кухня">
+            <img src="https://f1.lpcdn.site/c16a5320fa475530d9583c34fd356ef5/ca0be5f5cd84b6891c5a611b252bc904.jpg" alt="Тёмная кухня с глубокими графитовыми фасадами, островом и встроенной техникой" loading="lazy" width="1200" height="1200">
             <div class="portfolio-body">
               <h3>Тёмная кухня</h3>
-              <p>Премиальные кухни</p>
+              <p>Глубокий цвет, премиальный характер и материалы, которые создают интерьер с вау-эффектом.</p>
               <span class="project-price">от 280 000 ₽</span>
             </div>
           </article>
@@ -1721,32 +2193,13 @@
             <p>Привозим, собираем и устанавливаем мебель на объекте до готового результата.</p>
           </article>
         </div>
-      </div>
-    </section>
-
-    <section class="section section-alt" id="story">
-      <div class="container story-layout">
-        <div class="story-media"></div>
-        <div class="story">
-          <div class="label kicker">О нас</div>
-          <h2>Производство в центре Краснодара</h2>
-          <div class="divider"></div>
-          <p>МПК Мебель проектирует и производит мебель по индивидуальным размерам для квартир и домов в Краснодаре.</p>
-          <p>Мы соединяем эстетику, грамотную инженерную логику и практичность, чтобы мебель работала годами и не выглядела случайной.</p>
-          <p>Производство находится в районе КТ «Аврора», а проект ведём от первого замера до финального монтажа и сдачи готового результата.</p>
-          <div class="story-stack">
-            <div class="story-card">
-              <strong>5 лет</strong>
-              <span>Опыт команды</span>
+        <div class="portfolio-actions" style="margin-top:32px;">
+          <div class="inline-cta">
+            <div>
+              <strong>Готовы начать?</strong>
+              <p>Первый шаг к вашему проекту — бесплатный замер и короткое обсуждение задачи.</p>
             </div>
-            <div class="story-card">
-              <strong>500+</strong>
-              <span>Реализованных проектов</span>
-            </div>
-            <div class="story-card">
-              <strong>1 год</strong>
-              <span>Гарантия на изделия</span>
-            </div>
+            <button class="button primary" type="button" data-open-modal>Записаться на замер</button>
           </div>
         </div>
       </div>
@@ -1832,32 +2285,32 @@
         </div>
         <div class="faq-list">
           <article class="faq-card active">
-            <div class="faq-trigger">
+            <button class="faq-trigger" id="question-1" aria-expanded="true" aria-controls="answer-1" type="button">
               <h3>Вы делаете бесплатный замер?</h3>
               <span class="faq-plus"></span>
-            </div>
-            <p>Да, по Краснодару выезд на замер бесплатный. Это первый шаг к точному проекту и корректному расчёту.</p>
+            </button>
+            <p id="answer-1" role="region" aria-labelledby="question-1">Да, по Краснодару выезд на замер бесплатный. Это первый шаг к точному проекту и корректному расчёту.</p>
           </article>
           <article class="faq-card">
-            <div class="faq-trigger">
+            <button class="faq-trigger" id="question-2" aria-expanded="false" aria-controls="answer-2" type="button">
               <h3>Что можно заказать?</h3>
               <span class="faq-plus"></span>
-            </div>
-            <p>Кухни, шкафы, гардеробные, прихожие, ТВ-зоны и мебель для ванной по индивидуальному проекту.</p>
+            </button>
+            <p id="answer-2" role="region" aria-labelledby="question-2">Кухни, шкафы, гардеробные, прихожие, ТВ-зоны и мебель для ванной по индивидуальному проекту.</p>
           </article>
           <article class="faq-card">
-            <div class="faq-trigger">
+            <button class="faq-trigger" id="question-3" aria-expanded="false" aria-controls="answer-3" type="button">
               <h3>Работаете ли вы по договору?</h3>
               <span class="faq-plus"></span>
-            </div>
-            <p>Да, проект фиксируется договором. Это помогает заранее согласовать объём, этапы и ответственность сторон.</p>
+            </button>
+            <p id="answer-3" role="region" aria-labelledby="question-3">Да, проект фиксируется договором. Это помогает заранее согласовать объём, этапы и ответственность сторон.</p>
           </article>
           <article class="faq-card">
-            <div class="faq-trigger">
+            <button class="faq-trigger" id="question-4" aria-expanded="false" aria-controls="answer-4" type="button">
               <h3>Есть ли гарантия?</h3>
               <span class="faq-plus"></span>
-            </div>
-            <p>Да, на все изделия действует гарантия 1 год. После монтажа мы остаёмся на связи по рабочим вопросам.</p>
+            </button>
+            <p id="answer-4" role="region" aria-labelledby="question-4">Да, на все изделия действует гарантия 1 год. После монтажа мы остаёмся на связи по рабочим вопросам.</p>
           </article>
         </div>
       </div>
@@ -1918,26 +2371,12 @@
       </div>
     </section>
 
-    <section class="section" id="final-cta">
-      <div class="container cta-center">
-        <div class="cta-panel">
-          <div class="label">Начать проект</div>
-          <h2>Запишитесь на бесплатный дизайн-проект</h2>
-          <p>Оставьте контакты, чтобы получить расчёт, подбор материалов и удобное время для замера.</p>
-          <div class="cta-actions">
-            <a class="button primary" href="#contacts">Оставить заявку</a>
-            <a class="button secondary" href="tel:+79286682651">Позвонить +7 (928) 668-26-51</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="section" id="contacts">
       <div class="container contact-grid">
         <div class="contact-card contact-info">
-          <div class="label kicker">Контакты</div>
-          <h2>Свяжитесь с нами</h2>
-          <p>Приезжаем на замер по Краснодару, подбираем материалы под задачу и ведём проект до финального монтажа.</p>
+          <div class="label kicker">Контакты и старт проекта</div>
+          <h2>Запишитесь на бесплатный дизайн-проект и замер</h2>
+          <p>Оставьте контакты, чтобы получить расчёт, подбор материалов и удобное время для выезда на объект.</p>
           <div class="contact-list">
             <div>
               <strong>Телефон</strong>
@@ -1974,19 +2413,20 @@
           <form class="contact-form" id="lead-form">
             <label>
               Имя
-              <input type="text" name="name" placeholder="Как к вам обращаться">
+              <input type="text" name="name" aria-label="Имя" placeholder="Как к вам обращаться">
             </label>
             <label>
               Телефон
-              <input type="tel" name="phone" placeholder="+7 (___) ___-__-__">
+              <input type="tel" name="phone" aria-label="Телефон" inputmode="tel" placeholder="+7 (___) ___-__-__">
             </label>
             <label>
               Что нужно изготовить
-              <textarea name="project" placeholder="Например: кухня, шкаф в нишу, гардеробная"></textarea>
+              <textarea name="project" aria-label="Что нужно изготовить" placeholder="Например: кухня, шкаф в нишу, гардеробная"></textarea>
             </label>
             <p class="form-helper">Кнопка ниже откроет WhatsApp с уже заполненной заявкой. Если удобнее, можно сразу позвонить нам.</p>
             <button class="button primary" type="submit">Отправить в WhatsApp</button>
             <a class="button secondary" href="tel:+79286682651">Позвонить напрямую</a>
+            <div class="form-success" aria-live="polite"></div>
             <p class="form-note">Нажимая кнопку, вы подтверждаете согласие на обработку персональных данных для связи по вашему запросу.</p>
           </form>
         </div>
@@ -2008,6 +2448,7 @@
           <a href="#projects">Портфолио</a>
           <a href="#advantages">Преимущества</a>
           <a href="#offers">Акции</a>
+          <a href="/blog/">Блог</a>
           <a href="#contacts">Контакты</a>
         </div>
       </div>
@@ -2031,25 +2472,159 @@
   </footer>
 
   <a class="mobile-sticky-cta" href="#contacts">Получить дизайн-проект</a>
+  <div class="callback-widget">
+    <div class="callback-panel" aria-live="polite">
+      <strong>Перезвоните мне</strong>
+      <form id="callback-form">
+        <input type="tel" name="phone" inputmode="tel" placeholder="+7 (___) ___-__-__" aria-label="Телефон для обратного звонка">
+        <button class="button primary" type="submit">Жду звонка</button>
+      </form>
+      <div class="callback-note">Перезвоним через 5 минут</div>
+    </div>
+    <button class="callback-toggle" type="button" aria-label="Перезвоните мне">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7.8 10.5C9.1 13.1 10.9 14.9 13.5 16.2L15.5 14.2C15.8 13.9 16.2 13.8 16.6 13.9C17.9 14.3 19.3 14.5 20.7 14.5C21.3 14.5 21.7 14.9 21.7 15.5V20.2C21.7 20.8 21.3 21.2 20.7 21.2C10.5 21.2 2.8 13.5 2.8 3.3C2.8 2.7 3.2 2.3 3.8 2.3H8.5C9.1 2.3 9.5 2.7 9.5 3.3C9.5 4.7 9.7 6.1 10.1 7.4C10.2 7.8 10.1 8.2 9.8 8.5L7.8 10.5Z" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
+  </div>
+  <div class="modal" id="lead-modal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" type="button" aria-label="Закрыть форму">×</button>
+      <div class="label">Запись на замер</div>
+      <h3>Оставьте контакты</h3>
+      <p class="lead">Уточним задачу и подберём удобное время для бесплатного замера.</p>
+      <form class="modal-form" id="modal-form">
+        <input type="text" name="name" placeholder="Имя" aria-label="Имя">
+        <input type="tel" name="phone" inputmode="tel" placeholder="+7 (___) ___-__-__" aria-label="Телефон">
+        <button class="button primary" type="submit">Отправить</button>
+      </form>
+    </div>
+  </div>
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-card">
+      <button class="lightbox-close" type="button" aria-label="Закрыть фото">×</button>
+      <button class="lightbox-nav lightbox-prev" type="button" aria-label="Предыдущее фото">‹</button>
+      <img class="lightbox-image" src="" alt="">
+      <button class="lightbox-nav lightbox-next" type="button" aria-label="Следующее фото">›</button>
+      <div class="lightbox-caption"></div>
+    </div>
+  </div>
 
   <script>
     const topbar = document.querySelector(".topbar");
+    const menuToggle = document.querySelector(".menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const menuClose = document.querySelector(".menu-close");
     const leadForm = document.getElementById("lead-form");
     const portfolioGrid = document.querySelector(".portfolio-grid");
     const portfolioMore = document.querySelector(".portfolio-more");
     const mobileStickyCta = document.querySelector(".mobile-sticky-cta");
+    const modal = document.getElementById("lead-modal");
+    const modalClose = document.querySelector(".modal-close");
+    const modalForm = document.getElementById("modal-form");
+    const callbackToggle = document.querySelector(".callback-toggle");
+    const callbackPanel = document.querySelector(".callback-panel");
+    const callbackForm = document.getElementById("callback-form");
+    const callbackNote = document.querySelector(".callback-note");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.querySelector(".lightbox-image");
+    const lightboxCaption = document.querySelector(".lightbox-caption");
+    const lightboxClose = document.querySelector(".lightbox-close");
+    const lightboxPrev = document.querySelector(".lightbox-prev");
+    const lightboxNext = document.querySelector(".lightbox-next");
+    const lightboxItems = Array.from(document.querySelectorAll(".portfolio-card"));
     const quizSteps = Array.from(document.querySelectorAll(".quiz-step"));
     const quizOptions = Array.from(document.querySelectorAll(".quiz-option"));
     const quizProgressBar = document.querySelector(".quiz-progress-bar");
     const quizForm = document.getElementById("quiz-form");
+    const countupElements = Array.from(document.querySelectorAll("[data-countup]"));
     const quizState = {
       product: "",
       size: "",
       budget: ""
     };
+    let activeLightboxIndex = 0;
+
+    function digitsOnly(value) {
+      return value.replace(/\D/g, "");
+    }
+
+    function formatPhone(value) {
+      let digits = digitsOnly(value);
+      if (digits.startsWith("8")) digits = "7" + digits.slice(1);
+      if (!digits.startsWith("7")) digits = "7" + digits.slice(0, 10);
+      digits = digits.slice(0, 11);
+      const parts = [digits.slice(1, 4), digits.slice(4, 7), digits.slice(7, 9), digits.slice(9, 11)];
+      let result = "+7";
+      if (parts[0]) result += " (" + parts[0];
+      if (parts[0] && parts[0].length === 3) result += ")";
+      if (parts[1]) result += " " + parts[1];
+      if (parts[2]) result += "-" + parts[2];
+      if (parts[3]) result += "-" + parts[3];
+      return result;
+    }
+
+    function applyPhoneMask(input) {
+      input.value = formatPhone(input.value);
+    }
+
+    document.querySelectorAll('input[type="tel"]').forEach(function (input) {
+      input.addEventListener("input", function () {
+        applyPhoneMask(input);
+      });
+    });
+
+    function setFormError(field, message) {
+      const label = field.closest("label");
+      if (!label) return;
+      label.classList.add("field-invalid");
+      let error = label.querySelector(".field-error");
+      if (!error) {
+        error = document.createElement("span");
+        error.className = "field-error";
+        error.setAttribute("aria-live", "polite");
+        label.appendChild(error);
+      }
+      error.textContent = message;
+    }
+
+    function clearFormErrors(form) {
+      form.querySelectorAll(".field-invalid").forEach(function (field) {
+        field.classList.remove("field-invalid");
+      });
+      form.querySelectorAll(".field-error").forEach(function (error) {
+        error.remove();
+      });
+    }
+
+    function validateNameAndPhone(form, nameField, phoneField) {
+      clearFormErrors(form);
+      let valid = true;
+      if (!nameField.value.trim()) {
+        setFormError(nameField, "Введите имя");
+        valid = false;
+      }
+      if (digitsOnly(phoneField.value).length < 11) {
+        setFormError(phoneField, "Введите корректный номер");
+        valid = false;
+      }
+      return valid;
+    }
+
+    function openWhatsApp(lines) {
+      const message = encodeURIComponent(lines.filter(Boolean).join("\n"));
+      window.open("https://wa.me/79286682651?text=" + message, "_blank", "noopener");
+    }
 
     leadForm.addEventListener("submit", function (event) {
       event.preventDefault();
+      const submitButton = leadForm.querySelector('button[type="submit"]');
+      const success = leadForm.querySelector(".form-success");
+      const nameField = leadForm.querySelector('input[name="name"]');
+      const phoneField = leadForm.querySelector('input[name="phone"]');
+      if (!validateNameAndPhone(leadForm, nameField, phoneField)) {
+        return;
+      }
+      submitButton.disabled = true;
+      submitButton.textContent = "Отправка...";
 
       const formData = new FormData(leadForm);
       const name = (formData.get("name") || "").toString().trim();
@@ -2062,9 +2637,13 @@
         phone ? "Телефон: " + phone : "",
         project ? "Задача: " + project : ""
       ].filter(Boolean);
-
-      const message = encodeURIComponent(lines.join("\n"));
-      window.open("https://wa.me/79286682651?text=" + message, "_blank", "noopener");
+      success.textContent = "Заявка готова! Сейчас откроется WhatsApp — просто нажмите отправить.";
+      success.classList.add("is-visible");
+      setTimeout(function () {
+        openWhatsApp(lines);
+        submitButton.disabled = false;
+        submitButton.textContent = "Отправить в WhatsApp";
+      }, 1200);
     });
 
     function syncHeaderAndMobileCta() {
@@ -2080,6 +2659,30 @@
     window.addEventListener("scroll", syncHeaderAndMobileCta, { passive: true });
     window.addEventListener("resize", syncHeaderAndMobileCta);
     syncHeaderAndMobileCta();
+
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener("click", function () {
+        mobileMenu.classList.add("is-open");
+        mobileMenu.setAttribute("aria-hidden", "false");
+        menuToggle.setAttribute("aria-expanded", "true");
+      });
+    }
+
+    if (menuClose && mobileMenu) {
+      menuClose.addEventListener("click", function () {
+        mobileMenu.classList.remove("is-open");
+        mobileMenu.setAttribute("aria-hidden", "true");
+        menuToggle.setAttribute("aria-expanded", "false");
+      });
+    }
+
+    mobileMenu.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        mobileMenu.classList.remove("is-open");
+        mobileMenu.setAttribute("aria-hidden", "true");
+        if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
+      });
+    });
 
     if (portfolioMore) {
       portfolioMore.addEventListener("click", function () {
@@ -2102,17 +2705,15 @@
     });
 
     const revealGroups = [
-      "#intro-note .category-item",
+      "#intro-note .quick-card",
       ".portfolio-card",
+      ".inline-cta",
       ".value-card",
       ".process-card",
-      ".story-media",
-      ".story",
       ".offer-card",
       "#reviews .review-quote",
       "#quiz .quiz-card",
       ".faq-card",
-      ".cta-panel",
       ".contact-card",
       ".footer-group",
       ".footer-bottom"
@@ -2129,6 +2730,34 @@
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add("is-visible");
+          if (entry.target.classList.contains("process-line")) {
+            entry.target.classList.add("is-visible");
+          }
+          if (entry.target.classList.contains("metric")) {
+            const strong = entry.target.querySelector("[data-countup]");
+            if (strong && !strong.dataset.counted) {
+              const finalValue = Number(strong.dataset.countup);
+              const suffix = strong.textContent.replace(/[0-9]/g, "").trim();
+              let start = 0;
+              const duration = 1200;
+              const started = performance.now();
+              function tick(now) {
+                const progress = Math.min((now - started) / duration, 1);
+                const current = Math.round(finalValue * progress);
+                strong.textContent = current + (suffix ? " " + suffix : "");
+                if (progress < 1) {
+                  requestAnimationFrame(tick);
+                } else {
+                  strong.dataset.counted = "true";
+                  if (finalValue === 500) strong.textContent = "500+";
+                  if (finalValue === 0) strong.textContent = "0 ₽";
+                  if (finalValue === 1) strong.textContent = "1 год";
+                  if (finalValue === 5) strong.textContent = "5 лет";
+                }
+              }
+              requestAnimationFrame(tick);
+            }
+          }
           observer.unobserve(entry.target);
         }
       });
@@ -2141,6 +2770,8 @@
       observer.observe(element);
     });
 
+    observer.observe(document.querySelector(".process-line"));
+
     document.querySelectorAll(".faq-card").forEach(function (item, index) {
       const trigger = item.querySelector(".faq-trigger");
       if (index === 0) {
@@ -2150,9 +2781,12 @@
         const isActive = item.classList.contains("active");
         document.querySelectorAll(".faq-card").forEach(function (card) {
           card.classList.remove("active");
+          const button = card.querySelector(".faq-trigger");
+          if (button) button.setAttribute("aria-expanded", "false");
         });
         if (!isActive) {
           item.classList.add("active");
+          trigger.setAttribute("aria-expanded", "true");
         }
       });
     });
@@ -2180,6 +2814,112 @@
     setInterval(function () {
       showReview((activeReview + 1) % reviewCards.length);
     }, 6000);
+
+    function openModal() {
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeModal() {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+    }
+
+    document.querySelectorAll("[data-open-modal]").forEach(function (button) {
+      button.addEventListener("click", openModal);
+    });
+
+    if (modalClose) modalClose.addEventListener("click", closeModal);
+    modal.addEventListener("click", function (event) {
+      if (event.target === modal) closeModal();
+    });
+
+    if (modalForm) {
+      modalForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const nameField = modalForm.querySelector('input[name="name"]');
+        const phoneField = modalForm.querySelector('input[name="phone"]');
+        if (!validateNameAndPhone(modalForm, nameField, phoneField)) return;
+        openWhatsApp([
+          "Здравствуйте! Хочу записаться на бесплатный замер.",
+          "Имя: " + nameField.value.trim(),
+          "Телефон: " + phoneField.value.trim()
+        ]);
+        closeModal();
+      });
+    }
+
+    setTimeout(function () {
+      callbackToggle.classList.add("is-visible");
+    }, 5000);
+
+    callbackToggle.addEventListener("click", function () {
+      callbackPanel.classList.toggle("is-open");
+    });
+
+    callbackForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const phoneField = callbackForm.querySelector('input[name="phone"]');
+      if (digitsOnly(phoneField.value).length < 11) {
+        phoneField.style.borderColor = "#ef8d8d";
+        return;
+      }
+      phoneField.style.borderColor = "";
+      callbackNote.classList.add("is-visible");
+      openWhatsApp([
+        "Здравствуйте! Жду обратный звонок.",
+        "Телефон: " + phoneField.value.trim()
+      ]);
+    });
+
+    function showLightbox(index) {
+      const card = lightboxItems[index];
+      const image = card.querySelector("img");
+      lightboxImage.src = image.src;
+      lightboxImage.alt = image.alt;
+      lightboxCaption.textContent = card.dataset.lightboxTitle || card.querySelector("h3").textContent.trim();
+      lightbox.classList.add("is-open");
+      lightbox.setAttribute("aria-hidden", "false");
+      activeLightboxIndex = index;
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("is-open");
+      lightbox.setAttribute("aria-hidden", "true");
+    }
+
+    function moveLightbox(direction) {
+      activeLightboxIndex = (activeLightboxIndex + direction + lightboxItems.length) % lightboxItems.length;
+      showLightbox(activeLightboxIndex);
+    }
+
+    lightboxItems.forEach(function (item, index) {
+      item.addEventListener("click", function () {
+        showLightbox(index);
+      });
+      item.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          showLightbox(index);
+        }
+      });
+    });
+
+    lightboxClose.addEventListener("click", closeLightbox);
+    lightboxPrev.addEventListener("click", function () { moveLightbox(-1); });
+    lightboxNext.addEventListener("click", function () { moveLightbox(1); });
+    lightbox.addEventListener("click", function (event) {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        closeModal();
+        closeLightbox();
+      }
+      if (lightbox.classList.contains("is-open") && event.key === "ArrowLeft") moveLightbox(-1);
+      if (lightbox.classList.contains("is-open") && event.key === "ArrowRight") moveLightbox(1);
+    });
 
     function setQuizStep(stepNumber) {
       quizSteps.forEach(function (step) {
@@ -2217,6 +2957,9 @@
         const formData = new FormData(quizForm);
         const name = (formData.get("name") || "").toString().trim();
         const phone = (formData.get("phone") || "").toString().trim();
+        const nameField = quizForm.querySelector('input[name="name"]');
+        const phoneField = quizForm.querySelector('input[name="phone"]');
+        if (!validateNameAndPhone(quizForm, nameField, phoneField)) return;
         const lines = [
           "Здравствуйте! Хочу получить расчёт мебели.",
           quizState.product ? "Что нужно: " + quizState.product : "",

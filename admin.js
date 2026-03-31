@@ -11,7 +11,6 @@ const schema = [
   {
     title: "Шапка и контакты",
     fields: [
-      { label: "Название бренда", selector: ".brand span:last-child", type: "text" },
       { label: "Телефон", selector: ".contacts a:nth-child(1)", type: "text" },
       { label: "Ссылка телефона", selector: ".contacts a:nth-child(1)", attr: "href", type: "url" },
       { label: "Ссылка WhatsApp", selector: ".contacts a:nth-child(2)", attr: "href", type: "url" },
@@ -47,18 +46,16 @@ const schema = [
     title: "Категории",
     fields: [
       { label: "Заголовок", selector: "#intro-note h2", type: "text" },
-      { label: "Категория 1 заголовок", selector: "#intro-note .category-item:nth-of-type(1) h3", type: "text" },
-      { label: "Категория 1 текст", selector: "#intro-note .category-item:nth-of-type(1) p", type: "textarea" },
-      { label: "Категория 2 заголовок", selector: "#intro-note .category-item:nth-of-type(2) h3", type: "text" },
-      { label: "Категория 2 текст", selector: "#intro-note .category-item:nth-of-type(2) p", type: "textarea" },
-      { label: "Категория 3 заголовок", selector: "#intro-note .category-item:nth-of-type(3) h3", type: "text" },
-      { label: "Категория 3 текст", selector: "#intro-note .category-item:nth-of-type(3) p", type: "textarea" },
-      { label: "Категория 4 заголовок", selector: "#intro-note .category-item:nth-of-type(4) h3", type: "text" },
-      { label: "Категория 4 текст", selector: "#intro-note .category-item:nth-of-type(4) p", type: "textarea" },
-      { label: "Категория 5 заголовок", selector: "#intro-note .category-item:nth-of-type(5) h3", type: "text" },
-      { label: "Категория 5 текст", selector: "#intro-note .category-item:nth-of-type(5) p", type: "textarea" },
-      { label: "Категория 6 заголовок", selector: "#intro-note .category-item:nth-of-type(6) h3", type: "text" },
-      { label: "Категория 6 текст", selector: "#intro-note .category-item:nth-of-type(6) p", type: "textarea" }
+      { label: "Карточка 1 заголовок", selector: "#intro-note .quick-card:nth-of-type(1) h3", type: "text" },
+      { label: "Карточка 1 цена", selector: "#intro-note .quick-card:nth-of-type(1) p", type: "text" },
+      { label: "Карточка 2 заголовок", selector: "#intro-note .quick-card:nth-of-type(2) h3", type: "text" },
+      { label: "Карточка 2 цена", selector: "#intro-note .quick-card:nth-of-type(2) p", type: "text" },
+      { label: "Карточка 3 заголовок", selector: "#intro-note .quick-card:nth-of-type(3) h3", type: "text" },
+      { label: "Карточка 3 цена", selector: "#intro-note .quick-card:nth-of-type(3) p", type: "text" },
+      { label: "Карточка 4 заголовок", selector: "#intro-note .quick-card:nth-of-type(4) h3", type: "text" },
+      { label: "Карточка 4 цена", selector: "#intro-note .quick-card:nth-of-type(4) p", type: "text" },
+      { label: "Карточка 5 заголовок", selector: "#intro-note .quick-card:nth-of-type(5) h3", type: "text" },
+      { label: "Карточка 5 цена", selector: "#intro-note .quick-card:nth-of-type(5) p", type: "text" }
     ]
   },
   {
@@ -121,13 +118,8 @@ const schema = [
     ]
   },
   {
-    title: "История и спецпредложения",
+    title: "Акции",
     fields: [
-      { label: "Story kicker", selector: "#story .story .kicker", type: "text" },
-      { label: "Story заголовок", selector: "#story .story h2", type: "textarea" },
-      { label: "Story абзац 1", selector: "#story .story p:nth-of-type(1)", type: "textarea" },
-      { label: "Story абзац 2", selector: "#story .story p:nth-of-type(2)", type: "textarea" },
-      { label: "Story абзац 3", selector: "#story .story p:nth-of-type(3)", type: "textarea" },
       { label: "Офферы kicker", selector: "#offers .kicker", type: "text" },
       { label: "Офферы заголовок", selector: "#offers h2", type: "textarea" },
       { label: "Оффер 1 заголовок", selector: "#offers .offer-card:nth-of-type(1) h3", type: "text" },
@@ -162,8 +154,6 @@ const schema = [
       { label: "FAQ 3 текст", selector: "#faq .faq-card:nth-of-type(3) p", type: "textarea" },
       { label: "FAQ 4 заголовок", selector: "#faq .faq-card:nth-of-type(4) h3", type: "text" },
       { label: "FAQ 4 текст", selector: "#faq .faq-card:nth-of-type(4) p", type: "textarea" },
-      { label: "Финальный CTA заголовок", selector: "#final-cta h2", type: "textarea" },
-      { label: "Финальный CTA текст", selector: "#final-cta .cta-panel p:last-of-type", type: "textarea" },
       { label: "Контакты kicker", selector: "#contacts .contact-info .kicker", type: "text" },
       { label: "Контакты заголовок", selector: "#contacts .contact-info h2", type: "text" },
       { label: "Контакты описание", selector: "#contacts .contact-info > p:last-of-type", type: "textarea" },
