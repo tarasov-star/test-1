@@ -8,20 +8,52 @@
   <link rel="stylesheet" href="/assets/blog.css">
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Перейти к содержимому</a>
   <header class="topbar">
     <div class="container topbar-inner">
-      <a href="/"><img class="brand-logo" src="/assets/logo.png" alt="МПК Мебель"></a>
-      <nav class="nav" aria-label="Навигация блога">
+      <a class="brand-link" href="/"><img class="brand-logo" src="/assets/logo.png" alt="МПК Мебель"></a>
+      <nav class="nav" aria-label="Основная навигация">
         <a href="/">Главная</a>
         <a href="/#projects">Проекты</a>
+        <a href="/blog/" aria-current="page">Блог</a>
         <a href="/#contacts">Контакты</a>
       </nav>
+      <a class="header-cta" href="/#contacts">Обсудить проект</a>
+      <button class="menu-toggle" type="button" aria-label="Открыть меню" aria-controls="mobile-menu" aria-expanded="false">
+        <span class="menu-icon"></span>
+      </button>
     </div>
   </header>
 
-  <main>
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div>
+      <div class="mobile-menu-head">
+        <a class="brand-link" href="/"><img class="brand-logo" src="/assets/logo.png" alt="МПК Мебель"></a>
+        <button class="menu-close" type="button" aria-label="Закрыть меню">×</button>
+      </div>
+      <nav class="mobile-menu-nav" aria-label="Мобильная навигация">
+        <a href="/">Главная</a>
+        <a href="/#projects">Проекты</a>
+        <a href="/blog/" aria-current="page">Блог</a>
+        <a href="/#contacts">Контакты</a>
+      </nav>
+    </div>
+    <div class="mobile-menu-meta">
+      <a href="tel:+79286682651">+7 (928) 668-26-51</a>
+      <a href="https://wa.me/79286682651" target="_blank" rel="noreferrer">WhatsApp</a>
+      <a class="mobile-menu-cta" href="/#contacts">Оставить заявку</a>
+    </div>
+  </div>
+
+  <main id="main-content">
     <section class="hero">
       <div class="container">
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+          <ol>
+            <li><a href="/">Главная</a></li>
+            <li><span aria-current="page">Блог</span></li>
+          </ol>
+        </nav>
         <span class="eyebrow">Блог</span>
         <h1>Практичные статьи о мебели, планировке и интерьерных решениях</h1>
         <p>Собрали 5 материалов в духе интерьерного журнала: меньше воды, больше пользы для тех, кто выбирает кухню, шкаф, гардеробную или комплексную меблировку.</p>
@@ -99,7 +131,16 @@
   </main>
 
   <footer class="footer">
-    <div class="container">© 2026 МПК Мебель. Блог о мебели по индивидуальному проекту в Краснодаре.</div>
+    <div class="container footer-inner">
+      <div>© 2026 МПК Мебель. Блог о мебели по индивидуальному проекту в Краснодаре.</div>
+      <div class="footer-links">
+        <a href="/">Главная</a>
+        <a href="/#projects">Проекты</a>
+        <a href="/blog/">Блог</a>
+        <a href="/#contacts">Контакты</a>
+      </div>
+    </div>
   </footer>
+  <script src="/assets/blog.js"></script>
 </body>
 </html>
